@@ -3,7 +3,7 @@ package Model;
 public class Aktie
 {
     private String name;
-    private HistorischeDatenListe historischeDaten;
+    private TagesInfo historischeDaten;
     private double jahresHoch;
     private double jahresTief;
 }

@@ -1,9 +1,9 @@
 package Model;
 
-public class HistorischeDatenListe
+import java.util.ArrayList;
+
+public class HistorischeDatenListe<TagesInfo>
 {
-    private double startWert;
-    private double schlussWert;
-    private double tagesHoch;
-    private double tagesTief;
+
+
 }
