@@ -5,6 +5,7 @@
 package Model;
 import java.io.*;
 import java.util.*;
+import java.util.regex.Pattern;
 
 
 public class LesenCsv
@@ -13,20 +14,23 @@ public class LesenCsv
     static File file = new File("/Users/Finn/IdeaProjects/Aktien/DAI.DE.csv");
 
 
-    public static void lesenCSV(File file) throws IOException
+    public static ArrayList<TagesInfo> lesenCSV(File file) throws IOException
     {
+        ArrayList<TagesInfo> tagesInfoListe = new ArrayList<>();
         try(BufferedReader reader = new BufferedReader(new FileReader(file)))
         {
             String zeile;
+            //Erste zeile von CSV Datei wird nicht benoetigt.
+            reader.readLine();
             while((zeile = reader.readLine()) != null)
             {
-
-                speicherInhaltZeileInTagesinfo(zeile);
-                // TODO: 22.07.20 TagesInfo in Liste Speichern.
+                tagesInfoListe.add(speicherInhaltZeileInTagesinfo(zeile));
             }
         }
+        return tagesInfoListe;
     }
 
+    // TODO: 22.07.20 Not Null exception
     private static TagesInfo speicherInhaltZeileInTagesinfo(String zeile)
     {
         String[] getrennteZeile = zeile.split(",");
@@ -41,18 +45,5 @@ public class LesenCsv
         return new TagesInfo(datum,open,close,high,low,volume);
 
     }
-
-
-
-
-
-    // TODO: 22.07.20 File Methode,
-
-    public static void main(String[] args) throws IOException
-    {
-        lesenCSV(file);
-    }
-
-
 }
 

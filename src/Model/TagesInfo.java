@@ -1,8 +1,9 @@
 package Model;
 
 import java.util.Date;
+import java.util.Locale;
 
-public class TagesInfo
+public class TagesInfo implements CSVSchreibbar
 {
 
     private String datum;
@@ -25,12 +26,13 @@ public class TagesInfo
     @Override
     public String toString()
     {
-        return "TagesInfo{"
-                + "startWert=" + startWert
-                + ", schlussWert=" + schlussWert
-                + ", tagesHoch=" + tagesHoch
-                + ", tagesTief=" + tagesTief
-                + '}';
+        return String.format(Locale.US,"%s %f %f %f %f",datum,startWert,schlussWert,tagesHoch,tagesTief);
+    }
+
+    @Override
+    public String toCSV()
+    {
+        return String.format(Locale.US,"%s,%f,%f,%f,%f",datum,startWert,schlussWert,tagesHoch,tagesTief);
     }
 
     public void ausgabeConsoleTagesListe()
