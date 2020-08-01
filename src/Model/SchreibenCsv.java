@@ -5,7 +5,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-
+// TODO: 31.07.20 Interface CSVSchreibbar einbinden
 public class SchreibenCsv
 {
     static String ersteZeile = "Datum,open,high,low,close";
