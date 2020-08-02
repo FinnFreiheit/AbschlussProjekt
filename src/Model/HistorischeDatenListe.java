@@ -4,12 +4,13 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
-
+//TODO: 01.08.20 Statistische Werte
 public class HistorischeDatenListe
 {
     //__________________________________________________________________________________________________________________
     //Objekt Variablen
 
+    // TODO: 01.08.20 private -> problem bei Schreiben CSV
     public ArrayList<TagesInfo> historischeDatenListe = new ArrayList<TagesInfo>();
     private String name;
 
@@ -47,7 +48,7 @@ public class HistorischeDatenListe
     }
 
     /**
-     * Ueberprueft, ob das Datum dem vormart JJJJ-MM-DD entspricht.
+     * Ueberprueft, ob das Datum dem Format JJJJ-MM-DD entspricht.
      * @param datum zu ueberpruefendes Datum
      * @return true wenn es dem Format entspricht, false wenn nicht
      */

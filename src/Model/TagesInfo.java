@@ -40,6 +40,7 @@ public class TagesInfo implements CSVSchreibbar
 
     //__________________________________________________________________________________________________________________
     // Getter Setter
+
     public String getDatum()
     {
         return datum;
@@ -56,6 +57,7 @@ public class TagesInfo implements CSVSchreibbar
 
     //__________________________________________________________________________________________________________________
     //Methoden
+
     @Override
     public String toString()
     {

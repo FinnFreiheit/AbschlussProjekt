@@ -3,6 +3,8 @@ package Model;
 import java.io.IOException;
 import java.util.ArrayList;
 
+// TODO: 01.08.20 Depot in CSV Speichern
+
 public class Depot
 {
     private ArrayList<Aktie> depot;
@@ -29,9 +31,19 @@ public class Depot
 
     public void hinzufuegen(String datum, int anz, HistorischeDatenListe hdl) throws IOException
     {
-        Aktie aktie;
-        aktie = new Aktie(hdl.getTagesInformationen(datum), anz,hdl.getName());
-        this.depot.add(aktie);
+        boolean temp = aktieIstVorhanden(datum);
+
+        if(!temp)
+        {
+            Aktie aktie;
+            aktie = new Aktie(hdl.getTagesInformationen(datum), anz, hdl.getName());
+            this.depot.add(aktie);
+        }
+        else
+        {
+           getAktie(datum).setAnzahl(getAktie(datum).getAnzahl() + anz);
+
+        }
 
     }
 
@@ -54,4 +66,33 @@ public class Depot
             System.out.println(a.toString());
         }
     }
+
+    public int getAnzahlAktien()
+    {
+        int zaehler = 0;
+        for (Aktie a : this.depot)
+        {
+            zaehler += a.getAnzahl();
+        }
+        return zaehler;
+    }
+
+    public boolean aktieIstVorhanden(String datum)
+    {
+        for (Aktie a : this.depot)
+        {
+            if(a.getDatum().equals(datum)) return true;
+        }
+        return false;
+    }
+
+    public Aktie getAktie(String datum)
+    {
+        for (Aktie a : this.depot)
+        {
+            if (a.getDatum().equals(datum)) return a;
+        }
+        return null;
+    }
+
 }
