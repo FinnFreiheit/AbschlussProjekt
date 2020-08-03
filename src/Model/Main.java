@@ -7,14 +7,34 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class Main
 {
-    static File file = new File("/Users/Finn/IdeaProjects/Aktien/src/Data/DAI.DE.csv");
+
+    static File daimlerFile = new File("/Users/Finn/IdeaProjects/Aktien/src/Database/DAI.DE.csv");
+    static File siemensFile = new File("/Users/Finn/IdeaProjects/Aktien/src/Database/SIE.DE.csv");
+    static File infineonFile = new File("/Users/Finn/IdeaProjects/Aktien/src/Database/IFX.DE.csv");
+    static File kaufHistorieFile = new File("/Users/Finn/IdeaProjects/Aktien/src/Database/KaufHistorie.csv");
     static File schreibeFile = new File("/Users/Finn/IdeaProjects/Aktien/src/Test/DaimlerTestSChreiben.csv");
+
     //__________________________________________________________________________________________________________________
     //Main Methode
     public static void main(String[] args) throws IOException
     {
-        HistorischeDatenListe daimler = new HistorischeDatenListe(file);
-        Depot meinDepot = new Depot();
+        HistorischeDatenListe daimler = new HistorischeDatenListe(daimlerFile);
+        HistorischeDatenListe siemens = new HistorischeDatenListe(siemensFile);
+        HistorischeDatenListe infineon = new HistorischeDatenListe(infineonFile);
+
+        Database datenbasis = new Database();
+        datenbasis.addData(daimler);
+        datenbasis.addData(siemens);
+        datenbasis.addData(infineon);
+
+        KaufHistorie kaufHistorie = new KaufHistorie(kaufHistorieFile);
+
+        Depot meinDepot = kaufHistorie.depotErstellen(datenbasis);
+
+        meinDepot.ausgabeDepot();
+
+
+
 
 
         //daimler.ausgabeHistorischeDatenListeKonsole();
@@ -24,7 +44,7 @@ public class Main
 
         System.out.println("_____________");
 
-        meinDepot.hinzufuegen("2019-08-06",10,daimler);
+       /* meinDepot.hinzufuegen("2019-08-06",10,daimler);
         System.out.println(meinDepot.getAnzahlAktien());
         meinDepot.ausgabeDepot();
         meinDepot.hinzufuegen("2019-08-06",10,daimler);
@@ -36,7 +56,11 @@ public class Main
         meinDepot.hinzufuegen("2019-08-07",1,daimler);
         meinDepot.loeschen("2019-08-06", 15,"DAI.DE");
         meinDepot.ausgabeDepot();
+        */
+
 
 
     }
+
+
 }

@@ -8,10 +8,12 @@ import java.util.ArrayList;
 public class Depot
 {
     private ArrayList<Aktie> depot;
+    private double wert;
 
     public Depot()
     {
         depot = new ArrayList<>();
+        this.wert = 0;
     }
 
 
@@ -94,5 +96,7 @@ public class Depot
         }
         return null;
     }
+
+
 
 }
