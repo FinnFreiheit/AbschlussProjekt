@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class Main
 {
-    static File file = new File("/Users/Finn/IdeaProjects/Aktien/DAI.DE.csv");
+    static File file = new File("/Users/Finn/IdeaProjects/Aktien/src/Data/DAI.DE.csv");
     static File schreibeFile = new File("/Users/Finn/IdeaProjects/Aktien/src/Test/DaimlerTestSChreiben.csv");
     //__________________________________________________________________________________________________________________
     //Main Methode
