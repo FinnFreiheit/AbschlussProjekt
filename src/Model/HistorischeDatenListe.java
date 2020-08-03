@@ -19,7 +19,7 @@ public class HistorischeDatenListe
 
     public HistorischeDatenListe(File file) throws IOException
     {
-        this.historischeDatenListe = LesenCsv.lesenCSV(file);
+        this.historischeDatenListe = LesenCsvTagesInformationen.lesenCSV(file);
         this.name = getNameAusFile(file);
     }
 

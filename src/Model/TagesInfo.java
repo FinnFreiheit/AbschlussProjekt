@@ -70,6 +70,7 @@ public class TagesInfo implements CSVSchreibbar
         return String.format(Locale.US,"%s,%f,%f,%f,%f",datum,startWert,schlussWert,tagesHoch,tagesTief);
     }
 
+    // TODO: 03.08.20 HashCode
     @Override
     public boolean equals( Object o )
     {

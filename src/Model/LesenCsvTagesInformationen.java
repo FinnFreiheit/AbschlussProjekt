@@ -7,8 +7,8 @@ import java.io.*;
 import java.util.*;
 import java.util.regex.Pattern;
 
-
-public class LesenCsv
+//TODO Beide LesenCSV können auch in eine Klasse
+public class LesenCsvTagesInformationen
 {
 
     static File file = new File("/Users/Finn/IdeaProjects/Aktien/DAI.DE.csv");
