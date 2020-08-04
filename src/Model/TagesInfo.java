@@ -3,11 +3,13 @@ package Model;
 import java.util.Date;
 import java.util.Locale;
 
+/**
+ * Beinhaltet alle Informationen einer Aktie an einem bestimmten Tag.
+ */
 public class TagesInfo implements CSVSchreibbar
 {
 
     // TODO: 01.08.20 Volumen
-    //__________________________________________________________________________________________________________________
     //Obejkt Variablen
     private String datum;
     private double startWert;
@@ -16,8 +18,16 @@ public class TagesInfo implements CSVSchreibbar
     private double tagesTief;
     private double volumen;
 
-    //__________________________________________________________________________________________________________________
-    //Konstruktoren
+    /**
+     * Konstruktor
+     *
+     * @param datum       Datum
+     * @param startWert   Startwert
+     * @param schlussWert Schlusswert
+     * @param tagesHoch   Tageshoch
+     * @param tagesTief   Tagestief
+     * @param volumen     Volumen
+     */
     public TagesInfo(String datum, double startWert, double schlussWert, double tagesHoch, double tagesTief, double volumen)
     {
         this.datum = datum;
@@ -28,7 +38,9 @@ public class TagesInfo implements CSVSchreibbar
         this.volumen = volumen;
     }
 
-    //Copy Konstruktor
+    /**
+     * Copy Konstruktor
+     */
     public TagesInfo(TagesInfo info)
     {
         this.datum = info.datum;
@@ -38,9 +50,11 @@ public class TagesInfo implements CSVSchreibbar
         this.tagesTief = info.tagesTief;
     }
 
-    //__________________________________________________________________________________________________________________
-    // Getter Setter
-
+    /**
+     * Get Datum.
+     *
+     * @return Datum
+     */
     public String getDatum()
     {
         return datum;
@@ -48,15 +62,14 @@ public class TagesInfo implements CSVSchreibbar
 
     /**
      * Der Kaufpreis
-     * @return Kaufpreis
+     *
+     * @return Kaufpreis double
      */
     public double durchschnittsTagesPreis()
     {
         return ((this.tagesHoch + this.tagesTief) / 2 );
     }
 
-    //__________________________________________________________________________________________________________________
-    //Methoden
 
     @Override
     public String toString()
@@ -92,8 +105,12 @@ public class TagesInfo implements CSVSchreibbar
                 && this.tagesTief == that.tagesTief;
     }
 
-    public void ausgabeConsoleTagesListe()
+    /**
+     * Ausgabe console Tagesinformation.
+     */
+    public void ausgabeConsoleTagesInformation()
     {
         System.out.println(toString());
     }
 }
+

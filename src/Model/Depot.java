@@ -5,11 +5,19 @@ import java.util.ArrayList;
 
 // TODO: 01.08.20 Depot in CSV Speichern
 
+
+/**
+ * Das Depot ist eine Liste aus Aktien, und es besitzt ein gesammt Wert, der sich aus allen Aktien zusammensetzt.
+ */
 public class Depot
 {
+    //Objektvariablen
     private ArrayList<Aktie> depot;
     private double wert;
 
+    /**
+     * Konstruktor
+     */
     public Depot()
     {
         depot = new ArrayList<>();
@@ -17,21 +25,41 @@ public class Depot
     }
 
 
+    /**
+     * Loeschen.
+     *
+     * @param datum the datum
+     * @param anz   the anz
+     * @param name  the name
+     * @throws IOException the io exception
+     */
     public void loeschen(String datum, int anz, String name) throws IOException
     {
 
     }
 
+    /**
+     * Dem Depot wird eine neue Aktie hinzugefügt. Dazu werden die Informationen benötigt, wann man die Aktie
+     * gekauft hat, Welche Aktie man gekauft hat und wie viele Aktien man kauft.
+     * Es wird ein neues Objekt der Klasse Aktie anhand dieser Informationen erstellt.
+     *
+     * @param datum das Datum an dem eine Aktie gekauft wurde
+     * @param anz   die Anzahl der gekauften Aktien
+     * @param hdl   Die historischen Kursdaten, der Aktie. Anhand der Liste und des Datums wird der Preis ermittelt
+     * @throws IOException the io exception wenn das Datum nicht vorhanden ist, oder falsch.
+     */
     public void hinzufuegen(String datum, int anz, HistorischeDatenListe hdl) throws IOException
     {
         boolean temp = aktieIstVorhanden(hdl.getName());
 
+        //Wenn die Aktie noch nicht im depot vorhanden ist, wird ein neues Objekt der Klasse Aktie erzeugt
         if (!temp)
         {
             Aktie aktie;
             aktie = new Aktie(hdl.getTagesInformationen(datum), hdl.getName(), anz);
             this.depot.add(aktie);
         }
+        //wenn die Aktie schon im Depot vorhanden ist, wird die Anzahl und der Durchschnittspreis angepasst
         else
         {
             getAktie(hdl.getName()).setPreis(hdl.getTagesInformationen(datum).durchschnittsTagesPreis(), anz);
@@ -39,6 +67,12 @@ public class Depot
         }
     }
 
+    // TODO: 04.08.20 Wert
+    /**
+     * Wert Depot double.
+     *
+     * @return Wert vom Depot
+     */
     public double wertDepot()
     {
         double wert = 0;
@@ -51,6 +85,9 @@ public class Depot
         return wert;
     }
 
+    /**
+     * Ausgabe Depot auf Konsole.
+     */
     public void ausgabeDepot()
     {
         for (Aktie a : this.depot)
@@ -59,6 +96,11 @@ public class Depot
         }
     }
 
+    /**
+     * Gets anzahl aktien.
+     *
+     * @return the anzahl aktien
+     */
     public int getAnzahlAktien()
     {
         int zaehler = 0;
@@ -69,6 +111,12 @@ public class Depot
         return zaehler;
     }
 
+    /**
+     * überprüft ob die Aktie im Depot vorhanden ist boolean.
+     *
+     * @param name Name der Aktie
+     * @return the boolean true wenn vorhanden, false wenn nicht
+     */
     public boolean aktieIstVorhanden(String name)
     {
         for (Aktie a : this.depot)
@@ -78,6 +126,12 @@ public class Depot
         return false;
     }
 
+    /**
+     * Gets aktie.
+     *
+     * @param name Name der Aktie bsp.: DAI.DE, SIE.DE
+     * @return die Aktie mit dem Namen
+     */
     public Aktie getAktie(String name)
     {
         for (Aktie a : this.depot)
