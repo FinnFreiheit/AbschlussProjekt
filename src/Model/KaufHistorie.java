@@ -23,7 +23,7 @@ public class KaufHistorie
         {
             HistorischeDatenListe historischeDatenListe;
             historischeDatenListe = datenbasis.getHistorischeDatenListeAusDatenBasis(t.aktienName);
-            if(!t.handelsAktion)
+            if(t.handelsAktion)
             {
                 depot.hinzufuegen(t.datum, t.anzahl, historischeDatenListe);
             }

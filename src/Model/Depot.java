@@ -17,36 +17,26 @@ public class Depot
     }
 
 
-    public void loeschen(String datum, int anz,String name) throws IOException
+    public void loeschen(String datum, int anz, String name) throws IOException
     {
-        for (Aktie a : this.depot)
-        {
-            if(a.getDatum().equals(datum))
-            {
-                if (a.getAnzahl() < anz) throw new IOException();
-                else if (a.getAnzahl() == anz) this.depot.remove(a);
-                else if (a.getAnzahl() > anz) a.setAnzahl(a.getAnzahl() - anz);
-            }
-        }
 
     }
 
     public void hinzufuegen(String datum, int anz, HistorischeDatenListe hdl) throws IOException
     {
-        boolean temp = aktieIstVorhanden(datum);
+        boolean temp = aktieIstVorhanden(hdl.getName());
 
-        if(!temp)
+        if (!temp)
         {
             Aktie aktie;
-            aktie = new Aktie(hdl.getTagesInformationen(datum), anz, hdl.getName());
+            aktie = new Aktie(hdl.getTagesInformationen(datum), hdl.getName(), anz);
             this.depot.add(aktie);
         }
         else
         {
-           getAktie(datum).setAnzahl(getAktie(datum).getAnzahl() + anz);
-
+            getAktie(hdl.getName()).setPreis(hdl.getTagesInformationen(datum).durchschnittsTagesPreis(), anz);
+            getAktie(hdl.getName()).setAnzahl(getAktie(hdl.getName()).getAnzahl() + anz);
         }
-
     }
 
     public double wertDepot()
@@ -55,10 +45,10 @@ public class Depot
 
         for (Aktie a : this.depot)
         {
-            wert += a.durchschnittsTagesPreis() * a.getAnzahl();
+            wert += a.getPreis() * a.getAnzahl();
 
         }
-        return  wert;
+        return wert;
     }
 
     public void ausgabeDepot()
@@ -79,24 +69,23 @@ public class Depot
         return zaehler;
     }
 
-    public boolean aktieIstVorhanden(String datum)
+    public boolean aktieIstVorhanden(String name)
     {
         for (Aktie a : this.depot)
         {
-            if(a.getDatum().equals(datum)) return true;
+            if (a.getName().equals(name)) return true;
         }
         return false;
     }
 
-    public Aktie getAktie(String datum)
+    public Aktie getAktie(String name)
     {
         for (Aktie a : this.depot)
         {
-            if (a.getDatum().equals(datum)) return a;
+            if (a.getName().equals(name)) return a;
         }
         return null;
     }
-
 
 
 }
