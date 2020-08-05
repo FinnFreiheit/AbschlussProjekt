@@ -1,4 +1,4 @@
-package Model;
+package model;
 
 /**
  * Eine Transaktion besteht aus einem Namen der Aktie, einer Anzahl der gehandelten Aktien, dem Handelstag,

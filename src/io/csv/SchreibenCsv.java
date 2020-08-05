@@ -1,7 +1,7 @@
-package CSVIO;
+package io.csv;
 
-import Model.HistorischeDatenListe;
-import Model.TagesInfo;
+import model.HistorischeDatenListe;
+import model.TagesInfo;
 
 import java.io.BufferedWriter;
 import java.io.File;

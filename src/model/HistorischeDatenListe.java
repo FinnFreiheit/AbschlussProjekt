@@ -1,6 +1,7 @@
-package Model;
+package model;
 
-import CSVIO.LesenCsvTagesInformationen;
+import error.DatumFehler;
+import io.csv.LesenCsvTagesInformationen;
 
 import java.io.File;
 import java.io.IOException;
@@ -49,13 +50,13 @@ public class HistorischeDatenListe
      *
      * @param datum das Datum des Tages
      * @return die Informationen an diesem Tag
-     * @throws IOException the io exception bei einem fehler mit dem Datum
+     * @throws DatumFehler the io exception bei einem fehler mit dem Datum
      */
-    public TagesInfo getTagesInformationen(String datum) throws IOException
+    public TagesInfo getTagesInformationen(String datum) throws DatumFehler
     {
         if (!eingabeDatumUeberpruefen(datum))
         {
-            throw new IOException();
+            throw new DatumFehler("Das Datum entspricht nicht dem richtigen Format");
         }
         for (TagesInfo t : this.historischeDatenListe)
         {
@@ -70,7 +71,7 @@ public class HistorischeDatenListe
      * @param datum zu ueberpruefendes Datum
      * @return true wenn es dem Format entspricht, false wenn nicht
      */
-    public static boolean eingabeDatumUeberpruefen(String datum)
+    private static boolean eingabeDatumUeberpruefen(String datum)
     {
         String[] datumSplit = datum.split("-");
         return datumSplit.length == 3 && datumSplit[0].length() == 4 && datumSplit[1].length() == 2 && datumSplit[2].length() == 2;
@@ -84,7 +85,7 @@ public class HistorischeDatenListe
      * @param file File der CSV Datei
      * @return Name der Aktie
      */
-    public static String getNameAusFile(File file)
+    private static String getNameAusFile(File file)
     {
         String stringFile = file.toString();
         String[] strings = stringFile.split("/");

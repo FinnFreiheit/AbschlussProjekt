@@ -1,6 +1,8 @@
-package Model;
+package model;
 
-import CSVIO.LesenCSVKaufHistorie;
+import error.AktieNichtVorhanden;
+import error.DatumFehler;
+import io.csv.LesenCSVKaufHistorie;
 
 import java.io.File;
 import java.io.IOException;
@@ -31,9 +33,9 @@ public class KaufHistorie
      *
      * @param datenbasis die Datenbasis
      * @return das Depot
-     * @throws IOException the io exception bei fehler mit dem Datum
+     * @throws DatumFehler the io exception bei fehler mit dem Datum
      */
-    public Depot depotErstellen(Database datenbasis) throws IOException
+    public Depot depotErstellen(Database datenbasis) throws DatumFehler, AktieNichtVorhanden
     {
         Depot depot = new Depot();
         for (Transaktion t : this.kaufHistorie)

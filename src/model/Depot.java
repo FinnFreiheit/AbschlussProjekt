@@ -1,4 +1,7 @@
-package Model;
+package model;
+
+import error.AktieNichtVorhanden;
+import error.DatumFehler;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -33,13 +36,11 @@ public class Depot
      * @param name  the name
      * @throws IOException the io exception
      */
-    public void verkaufen(double preis, int anz, String name) throws IOException
+    public void verkaufen(double preis, int anz, String name) throws AktieNichtVorhanden
     {
         if(!aktieIstVorhanden(name))
         {
-            // TODO: 05.08.20 Eigene Exception
-            System.out.println("Fehler Aktie nicht vorhanden");
-            throw new IOException();
+            throw new AktieNichtVorhanden("Fehler: Aktie nicht vorhanden");
         }
         else
         {
@@ -57,9 +58,9 @@ public class Depot
      * @param datum das Datum an dem eine Aktie gekauft wurde
      * @param anz   die Anzahl der gekauften Aktien
      * @param hdl   Die historischen Kursdaten, der Aktie. Anhand der Liste und des Datums wird der Preis ermittelt
-     * @throws IOException the io exception wenn das Datum nicht vorhanden ist, oder falsch.
+     * @throws DatumFehler the io exception wenn das Datum nicht vorhanden ist, oder falsch.
      */
-    public void kaufen(String datum, int anz, HistorischeDatenListe hdl) throws IOException
+    public void kaufen(String datum, int anz, HistorischeDatenListe hdl) throws DatumFehler
     {
         //Wenn die Aktie noch nicht im depot vorhanden ist, wird ein neues Objekt der Klasse Aktie erzeugt
         if (!aktieIstVorhanden(hdl.getName()))

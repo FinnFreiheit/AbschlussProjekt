@@ -1,7 +1,8 @@
-package Test;
+package test;
 
-import Model.Depot;
-import Model.HistorischeDatenListe;
+import error.DatumFehler;
+import model.Depot;
+import model.HistorischeDatenListe;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -36,13 +37,13 @@ class TestDepot
     }
 
     @Test
-    void hinzufuegen() throws IOException
+    void hinzufuegen() throws DatumFehler
     {
         meinDepot.kaufen("2019-08-06",10,daimler);
     }
 
     @Test
-    void wertDepot() throws IOException
+    void wertDepot() throws DatumFehler
     {
         meinDepot.kaufen("2019-08-06",10,daimler);
         assertEquals(437.6,meinDepot.wertDepot());
@@ -50,14 +51,14 @@ class TestDepot
     }
 
     @Test
-    void ausgabeDepot() throws IOException
+    void ausgabeDepot() throws DatumFehler
     {
         meinDepot.kaufen("2019-08-06",10,daimler);
         meinDepot.ausgabeDepot();
     }
 
     @Test
-    void getAnzahlAktien() throws IOException
+    void getAnzahlAktien() throws DatumFehler
     {
         meinDepot.kaufen("2019-08-06",10,daimler);
         assertEquals(10,meinDepot.getAnzahlAktien());

@@ -1,4 +1,7 @@
-package Model;
+package model;
+
+import error.AktieNichtVorhanden;
+import error.DatumFehler;
 
 import java.io.File;
 import java.io.IOException;
@@ -16,7 +19,7 @@ public class Main
 
     //__________________________________________________________________________________________________________________
     //Main Methode
-    public static void main(String[] args) throws IOException
+    public static void main(String[] args) throws IOException, DatumFehler, AktieNichtVorhanden
     {
         HistorischeDatenListe daimler = new HistorischeDatenListe(daimlerFile);
         HistorischeDatenListe siemens = new HistorischeDatenListe(siemensFile);

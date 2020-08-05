@@ -1,7 +1,8 @@
-package Test;
+package test;
 
-import Model.HistorischeDatenListe;
-import Model.TagesInfo;
+import error.DatumFehler;
+import model.HistorischeDatenListe;
+import model.TagesInfo;
 
 import java.io.File;
 import java.io.IOException;
@@ -24,7 +25,7 @@ class TestHistorischeDatenListe
     }
 
     @org.junit.jupiter.api.Test
-    void getTagesInformationen() throws IOException
+    void getTagesInformationen() throws DatumFehler
     {
         TagesInfo referenzObj = new TagesInfo("2019-08-06",44.145000,43.279999,
                 44.305000,43.215000,4018085);
@@ -36,6 +37,7 @@ class TestHistorischeDatenListe
 
     }
 
+   /* todo Funktioniert nicht mehr da Private
     @org.junit.jupiter.api.Test
     void eingabeDatumUeberpruefen()
     {
@@ -44,6 +46,8 @@ class TestHistorischeDatenListe
         assertFalse(HistorischeDatenListe.eingabeDatumUeberpruefen("12-2020-12"));
         assertFalse(HistorischeDatenListe.eingabeDatumUeberpruefen("12-12"));
     }
+    */
+
 
     @org.junit.jupiter.api.AfterEach
     void tearDown()

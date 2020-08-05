@@ -1,6 +1,6 @@
-package CSVIO;
+package io.csv;
 
-import Model.Transaktion;
+import model.Transaktion;
 
 import java.io.*;
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package Model;
+package model;
 
 
 /**
@@ -93,12 +93,9 @@ public class Aktie
 
         this.preis = (neuerWert / (anz + this.anzahl));
     }
-
     @Override
     public String toString()
     {
         return this.name + " " + this.anzahl + " " + this.preis;
     }
-
-
 }
