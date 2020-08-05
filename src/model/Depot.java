@@ -2,13 +2,11 @@ package model;
 
 import error.AktieNichtVorhanden;
 import error.DatumFehler;
+import error.TagesInformationenNichtVorhanden;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 // TODO: 01.08.20 Depot in CSV Speichern
-
-
 /**
  * Das Depot ist eine Liste aus Aktien, und es besitzt ein gesammt Wert, der sich aus allen Aktien zusammensetzt.
  */
@@ -34,13 +32,14 @@ public class Depot
      * @param preis verkaufspreis
      * @param anz   the anz
      * @param name  the name
-     * @throws IOException the io exception
+     * @throws AktieNichtVorhanden Exception wenn die Aktie die Verkauft werden soll nicht
+     * vorhanden ist.
      */
     public void verkaufen(double preis, int anz, String name) throws AktieNichtVorhanden
     {
-        if(!aktieIstVorhanden(name))
+        if(aktieIstNichtVorhanden(name))
         {
-            throw new AktieNichtVorhanden("Fehler: Aktie nicht vorhanden");
+            throw new AktieNichtVorhanden("Die Aktie die Verkauft werden soll ist nicht Vorhanden");
         }
         else
         {
@@ -60,10 +59,10 @@ public class Depot
      * @param hdl   Die historischen Kursdaten, der Aktie. Anhand der Liste und des Datums wird der Preis ermittelt
      * @throws DatumFehler the io exception wenn das Datum nicht vorhanden ist, oder falsch.
      */
-    public void kaufen(String datum, int anz, HistorischeDatenListe hdl) throws DatumFehler
+    public void kaufen(String datum, int anz, HistorischeDatenListe hdl) throws DatumFehler, AktieNichtVorhanden, TagesInformationenNichtVorhanden
     {
         //Wenn die Aktie noch nicht im depot vorhanden ist, wird ein neues Objekt der Klasse Aktie erzeugt
-        if (!aktieIstVorhanden(hdl.getName()))
+        if (aktieIstNichtVorhanden(hdl.getName()))
         {
             Aktie aktie;
             aktie = new Aktie(hdl.getTagesInformationen(datum), hdl.getName(), anz);
@@ -127,13 +126,13 @@ public class Depot
      * @param name Name der Aktie
      * @return the boolean true wenn vorhanden, false wenn nicht
      */
-    public boolean aktieIstVorhanden(String name)
+    public boolean aktieIstNichtVorhanden(String name)
     {
         for (Aktie a : this.depot)
         {
-            if (a.getName().equals(name)) return true;
+            if (a.getName().equals(name)) return false;
         }
-        return false;
+        return true;
     }
 
     /**
@@ -142,12 +141,12 @@ public class Depot
      * @param name Name der Aktie bsp.: DAI.DE, SIE.DE
      * @return die Aktie mit dem Namen
      */
-    public Aktie getAktie(String name)
+    public Aktie getAktie(String name) throws AktieNichtVorhanden
     {
         for (Aktie a : this.depot)
         {
             if (a.getName().equals(name)) return a;
         }
-        return null;
+        throw new AktieNichtVorhanden("Aktie mit dem namen" + name + "ist nicht vorhanden");
     }
 }

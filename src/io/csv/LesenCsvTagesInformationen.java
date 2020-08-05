@@ -3,6 +3,7 @@
  * Die Informationen werden in der ArrayListe HistorischeDatenListe gespeichert.
  */
 package io.csv;
+import error.FehlerCSVInhalt;
 import model.TagesInfo;
 
 import java.io.*;
@@ -14,9 +15,7 @@ public class LesenCsvTagesInformationen
 
     static File file = new File("/Users/Finn/IdeaProjects/Aktien/DAI.DE.csv");
 
-    // TODO: 01.08.20 Den Namen der Aktie aus der Datei auslesen Bsp(Dai.de)
-
-    public static ArrayList<TagesInfo> lesenCSV(File file) throws IOException
+    public static ArrayList<TagesInfo> lesenCSV(File file) throws IOException, FehlerCSVInhalt
     {
         ArrayList<TagesInfo> tagesInfoListe = new ArrayList<>();
         try(BufferedReader reader = new BufferedReader(new FileReader(file)))
@@ -32,10 +31,14 @@ public class LesenCsvTagesInformationen
         return tagesInfoListe;
     }
 
-    // TODO: 22.07.20 Not Null exception
-    private static TagesInfo speicherInhaltZeileInTagesinfo(String zeile)
+
+    private static TagesInfo speicherInhaltZeileInTagesinfo(String zeile) throws FehlerCSVInhalt
     {
         String[] getrennteZeile = zeile.split(",");
+
+        if(getrennteZeile.length != 7) throw new FehlerCSVInhalt("In der CSV-Datei einer Aktie gibt es ein " +
+                "inhaltlichen Fehler. Anstatt von 7 Informationen pro Zeile sind " + getrennteZeile.length +
+                " vorhanden");
 
         String datum = getrennteZeile[0];
         double open = Double.parseDouble(getrennteZeile[1]);

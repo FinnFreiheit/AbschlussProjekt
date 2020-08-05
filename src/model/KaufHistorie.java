@@ -2,6 +2,8 @@ package model;
 
 import error.AktieNichtVorhanden;
 import error.DatumFehler;
+import error.FehlerCSVInhalt;
+import error.TagesInformationenNichtVorhanden;
 import io.csv.LesenCSVKaufHistorie;
 
 import java.io.File;
@@ -23,7 +25,7 @@ public class KaufHistorie
      * @param file Die Transaktionen werden aus einer CSV Datei eingelesen.
      * @throws IOException the io exception bei fehler mit der Datei
      */
-    public KaufHistorie(File file) throws IOException
+    public KaufHistorie(File file) throws IOException, FehlerCSVInhalt
     {
         this.kaufHistorie = LesenCSVKaufHistorie.lesenCSVtoTransaktionenListe(file);
     }
@@ -35,7 +37,7 @@ public class KaufHistorie
      * @return das Depot
      * @throws DatumFehler the io exception bei fehler mit dem Datum
      */
-    public Depot depotErstellen(Database datenbasis) throws DatumFehler, AktieNichtVorhanden
+    public Depot depotErstellen(Database datenbasis) throws DatumFehler, AktieNichtVorhanden, TagesInformationenNichtVorhanden
     {
         Depot depot = new Depot();
         for (Transaktion t : this.kaufHistorie)

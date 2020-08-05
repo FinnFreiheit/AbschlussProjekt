@@ -91,7 +91,7 @@ public class Aktie
         double alterWert = this.preis * this.anzahl;
         double neuerWert = alterWert + (preis * anz);
 
-        this.preis = (neuerWert / (anz + this.anzahl));
+        this.preis = (neuerWert / (this.anzahl + anz));
     }
     @Override
     public String toString()

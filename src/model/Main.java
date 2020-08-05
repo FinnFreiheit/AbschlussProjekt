@@ -2,12 +2,15 @@ package model;
 
 import error.AktieNichtVorhanden;
 import error.DatumFehler;
+import error.FehlerCSVInhalt;
+import error.TagesInformationenNichtVorhanden;
 
 import java.io.File;
 import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+// TODO: 05.08.20 Format ausgabe auf zwei Nachkommastellen
 public class Main
 {
 
@@ -19,7 +22,7 @@ public class Main
 
     //__________________________________________________________________________________________________________________
     //Main Methode
-    public static void main(String[] args) throws IOException, DatumFehler, AktieNichtVorhanden
+    public static void main(String[] args) throws IOException, DatumFehler, AktieNichtVorhanden, TagesInformationenNichtVorhanden, FehlerCSVInhalt
     {
         HistorischeDatenListe daimler = new HistorischeDatenListe(daimlerFile);
         HistorischeDatenListe siemens = new HistorischeDatenListe(siemensFile);
@@ -35,6 +38,7 @@ public class Main
         Depot meinDepot = kaufHistorie.depotErstellen(datenbasis);
 
         meinDepot.ausgabeDepot();
+        System.out.println("Wert Depot: " + meinDepot.wertDepot());
 
 
 

@@ -1,6 +1,8 @@
 package test;
 
 import error.DatumFehler;
+import error.FehlerCSVInhalt;
+import error.TagesInformationenNichtVorhanden;
 import model.HistorischeDatenListe;
 import model.TagesInfo;
 
@@ -14,7 +16,7 @@ class TestHistorischeDatenListe
     HistorischeDatenListe daimler;
 
     @org.junit.jupiter.api.BeforeEach
-    void setUp() throws IOException
+    void setUp() throws IOException, FehlerCSVInhalt
     {
         daimler = new HistorischeDatenListe(new File("/Users/Finn/IdeaProjects/Aktien/DAI.DE.csv"));
     }
@@ -25,7 +27,7 @@ class TestHistorischeDatenListe
     }
 
     @org.junit.jupiter.api.Test
-    void getTagesInformationen() throws DatumFehler
+    void getTagesInformationen() throws DatumFehler, TagesInformationenNichtVorhanden
     {
         TagesInfo referenzObj = new TagesInfo("2019-08-06",44.145000,43.279999,
                 44.305000,43.215000,4018085);

@@ -1,6 +1,9 @@
 package test;
 
+import error.AktieNichtVorhanden;
 import error.DatumFehler;
+import error.FehlerCSVInhalt;
+import error.TagesInformationenNichtVorhanden;
 import model.Depot;
 import model.HistorischeDatenListe;
 import org.junit.jupiter.api.AfterEach;
@@ -19,7 +22,7 @@ class TestDepot
     Depot meinDepot;
 
     @BeforeEach
-    void setUp() throws IOException
+    void setUp() throws IOException, FehlerCSVInhalt
     {
         daimler = new HistorischeDatenListe(file);
         meinDepot = new Depot();
@@ -37,13 +40,13 @@ class TestDepot
     }
 
     @Test
-    void hinzufuegen() throws DatumFehler
+    void hinzufuegen() throws DatumFehler, TagesInformationenNichtVorhanden, AktieNichtVorhanden
     {
         meinDepot.kaufen("2019-08-06",10,daimler);
     }
 
     @Test
-    void wertDepot() throws DatumFehler
+    void wertDepot() throws DatumFehler, TagesInformationenNichtVorhanden, AktieNichtVorhanden
     {
         meinDepot.kaufen("2019-08-06",10,daimler);
         assertEquals(437.6,meinDepot.wertDepot());
@@ -51,14 +54,14 @@ class TestDepot
     }
 
     @Test
-    void ausgabeDepot() throws DatumFehler
+    void ausgabeDepot() throws DatumFehler, TagesInformationenNichtVorhanden, AktieNichtVorhanden
     {
         meinDepot.kaufen("2019-08-06",10,daimler);
         meinDepot.ausgabeDepot();
     }
 
     @Test
-    void getAnzahlAktien() throws DatumFehler
+    void getAnzahlAktien() throws DatumFehler, TagesInformationenNichtVorhanden, AktieNichtVorhanden
     {
         meinDepot.kaufen("2019-08-06",10,daimler);
         assertEquals(10,meinDepot.getAnzahlAktien());

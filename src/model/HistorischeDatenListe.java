@@ -1,6 +1,8 @@
 package model;
 
 import error.DatumFehler;
+import error.FehlerCSVInhalt;
+import error.TagesInformationenNichtVorhanden;
 import io.csv.LesenCsvTagesInformationen;
 
 import java.io.File;
@@ -28,7 +30,7 @@ public class HistorischeDatenListe
      * @param file das File der CSV Datei
      * @throws IOException the io exception bei einem Fehler mit der Datei
      */
-    public HistorischeDatenListe(File file) throws IOException
+    public HistorischeDatenListe(File file) throws IOException, FehlerCSVInhalt
     {
         this.historischeDatenListe = LesenCsvTagesInformationen.lesenCSV(file);
         this.name = getNameAusFile(file);
@@ -52,7 +54,7 @@ public class HistorischeDatenListe
      * @return die Informationen an diesem Tag
      * @throws DatumFehler the io exception bei einem fehler mit dem Datum
      */
-    public TagesInfo getTagesInformationen(String datum) throws DatumFehler
+    public TagesInfo getTagesInformationen(String datum) throws DatumFehler, TagesInformationenNichtVorhanden
     {
         if (!eingabeDatumUeberpruefen(datum))
         {
@@ -62,7 +64,8 @@ public class HistorischeDatenListe
         {
             if (t.getDatum().equals(datum)) return t;
         }
-        return null;
+        throw new TagesInformationenNichtVorhanden("Es existieren keine Tagesinformationen zu dem Datum " +
+               datum);
     }
 
     /**
