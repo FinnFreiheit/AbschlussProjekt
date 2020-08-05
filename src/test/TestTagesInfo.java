@@ -13,21 +13,9 @@ class TestTagesInfo
     // temp = temp2 != temp3
     TagesInfo temp = new TagesInfo("2020-12-01",40.000,
             41.000,41.500,39.500,100);
-    TagesInfo temp2 = new TagesInfo("2020-12-01",40.000,
-            41.000,41.500,39.500,100);
+    TagesInfo temp2 = new TagesInfo(temp);
     TagesInfo temp3 = new TagesInfo("2020-12-01",41.000,
             41.000,41.500,39.500,100);
-
-    @BeforeEach
-    void setUp()
-    {
-
-    }
-
-    @AfterEach
-    void tearDown()
-    {
-    }
 
    @Test
    void testdurchschnittsTagesPreis()
@@ -60,7 +48,9 @@ class TestTagesInfo
     }
 
     @Test
-    void ausgabeConsoleTagesListe()
+    void ausgabeConsoleTagesInformationen()
     {
+        temp.ausgabeConsoleTagesInformation();
+
     }
 }

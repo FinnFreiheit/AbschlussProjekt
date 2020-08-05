@@ -14,7 +14,6 @@ import java.util.ArrayList;
  * über einen gewissen Zeitraum.
  * Die historische Datenliste besteht aus Tagesinformationen und einem Namen.
  */
-//TODO: 01.08.20 Statistische Werte
 public class HistorischeDatenListe
 {
 
@@ -106,5 +105,11 @@ public class HistorischeDatenListe
     {
         return this.name;
     }
+
+    public double getLetztenDurchschnittspreis()
+    {
+        return historischeDatenListe.get(historischeDatenListe.size() - 1).durchschnittsTagesPreis();
+    }
+
 
 }

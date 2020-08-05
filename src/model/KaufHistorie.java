@@ -35,7 +35,7 @@ public class KaufHistorie
      *
      * @param datenbasis die Datenbasis
      * @return das Depot
-     * @throws DatumFehler the io exception bei fehler mit dem Datum
+     * @throws DatumFehler the io exception bei einem fehler mit dem Datum
      */
     public Depot depotErstellen(Database datenbasis) throws DatumFehler, AktieNichtVorhanden, TagesInformationenNichtVorhanden
     {
@@ -50,12 +50,17 @@ public class KaufHistorie
             }
             else
             {
-                depot.verkaufen(historischeDatenListe.getTagesInformationen(t.datum).durchschnittsTagesPreis(),
-                        t.anzahl, historischeDatenListe.getName());
-
+                depot.verkaufen(historischeDatenListe.getTagesInformationen(t.datum).durchschnittsTagesPreis(), t.anzahl, historischeDatenListe.getName());
             }
+
+            System.out.println("___________________________________");
+            System.out.println("Datum : " + t.datum);
+            depot.ausgabeDepot();
+            System.out.println("Invest " + depot.getInvestition());
+            System.out.println("Gewinn / Verlust " + depot.depotWertZumZeitpunkt(t.datum,datenbasis));
+            System.out.println("___________________________________");
+
         }
         return depot;
     }
-
 }

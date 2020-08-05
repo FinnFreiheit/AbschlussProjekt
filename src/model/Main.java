@@ -13,13 +13,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 // TODO: 05.08.20 Format ausgabe auf zwei Nachkommastellen
 public class Main
 {
-
     static File daimlerFile = new File("/Users/Finn/IdeaProjects/Aktien/src/Database/DAI.DE.csv");
     static File siemensFile = new File("/Users/Finn/IdeaProjects/Aktien/src/Database/SIE.DE.csv");
     static File infineonFile = new File("/Users/Finn/IdeaProjects/Aktien/src/Database/IFX.DE.csv");
     static File kaufHistorieFile = new File("/Users/Finn/IdeaProjects/Aktien/src/Database/KaufHistorie.csv");
     static File schreibeFile = new File("/Users/Finn/IdeaProjects/Aktien/src/Test/DaimlerTestSChreiben.csv");
-
     //__________________________________________________________________________________________________________________
     //Main Methode
     public static void main(String[] args) throws IOException, DatumFehler, AktieNichtVorhanden, TagesInformationenNichtVorhanden, FehlerCSVInhalt
@@ -37,8 +35,9 @@ public class Main
 
         Depot meinDepot = kaufHistorie.depotErstellen(datenbasis);
 
+        System.out.println("______________________________");
         meinDepot.ausgabeDepot();
-        System.out.println("Wert Depot: " + meinDepot.wertDepot());
+        System.out.println(meinDepot.getInvestition());
 
 
 

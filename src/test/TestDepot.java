@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class TestDepot
 {
-    static File file = new File("/Users/Finn/IdeaProjects/Aktien/DAI.DE.csv");
+    static File file = new File("/Users/Finn/IdeaProjects/Aktien/src/test/DAI.DE.csv");
     HistorischeDatenListe daimler;
     Depot meinDepot;
 
@@ -34,22 +34,36 @@ class TestDepot
     }
 
     @Test
-    void loeschen() throws IOException
+    void kaufen_verkaufen() throws DatumFehler, TagesInformationenNichtVorhanden, AktieNichtVorhanden
     {
-
-    }
-
-    @Test
-    void hinzufuegen() throws DatumFehler, TagesInformationenNichtVorhanden, AktieNichtVorhanden
-    {
+        //Kaufen
         meinDepot.kaufen("2019-08-06",10,daimler);
+        assertEquals(meinDepot.getAnzahlAktien(),10);
+        meinDepot.kaufen("2019-08-07",10,daimler);
+        assertEquals(meinDepot.getAnzahlAktien(),20);
+
+        //Verkaufen
+        meinDepot.verkaufen(daimler.getTagesInformationen("2019-08-08").durchschnittsTagesPreis(),
+                10,daimler.getName());
+        assertEquals(meinDepot.getAnzahlAktien(),10);
+
+        try
+        {
+            meinDepot.verkaufen(20,10,"SIE.DE");
+        }
+        catch (AktieNichtVorhanden e)
+        {
+            System.out.println(e.getMessage());
+        }
     }
+
+
 
     @Test
     void wertDepot() throws DatumFehler, TagesInformationenNichtVorhanden, AktieNichtVorhanden
     {
         meinDepot.kaufen("2019-08-06",10,daimler);
-        assertEquals(437.6,meinDepot.wertDepot());
+       // assertEquals(437.6,meinDepot.wertDepot());
 
     }
 
@@ -65,5 +79,22 @@ class TestDepot
     {
         meinDepot.kaufen("2019-08-06",10,daimler);
         assertEquals(10,meinDepot.getAnzahlAktien());
+    }
+
+    @Test
+    void getAktie() throws AktieNichtVorhanden, TagesInformationenNichtVorhanden, DatumFehler
+    {
+        meinDepot.kaufen("2019-08-06",10,daimler);
+        try
+        {
+            assertEquals("DAI.DE", meinDepot.getAktie("DAI.DE").getName());
+
+            //Erwarte eine Exception bei SIE.DE
+            meinDepot.getAktie("SIE.DE");
+        } catch (AktieNichtVorhanden aktieNichtVorhanden)
+        {
+
+            System.out.println(aktieNichtVorhanden.getMessage());
+        }
     }
 }

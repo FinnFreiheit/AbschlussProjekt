@@ -14,7 +14,7 @@ public class Depot
 {
     //Objektvariablen
     private ArrayList<Aktie> depot;
-    private double wert;
+    private double investition;
 
     /**
      * Konstruktor
@@ -22,7 +22,8 @@ public class Depot
     public Depot()
     {
         depot = new ArrayList<>();
-        this.wert = 0;
+        this.investition = 0;
+
     }
 
 
@@ -47,11 +48,12 @@ public class Depot
           getAktie(name).setAnzahl(getAktie(name).getAnzahl() - anz);
         }
 
+        investitionsBetragDepot();
     }
 
     /**
-     * Dem Depot wird eine neue Aktie hinzugefügt. Dazu werden die Informationen benötigt, wann man die Aktie
-     * gekauft hat, Welche Aktie man gekauft hat und wie viele Aktien man kauft.
+     * Dem Depot wird eine neue Aktie hinzugefügt. Dazu werden die Informationen benötigt wann man die Aktie
+     * gekauft hat, welche Aktie man gekauft hat und wie viele Aktien man kauft.
      * Es wird ein neues Objekt der Klasse Aktie anhand dieser Informationen erstellt.
      *
      * @param datum das Datum an dem eine Aktie gekauft wurde
@@ -74,24 +76,23 @@ public class Depot
             getAktie(hdl.getName()).setPreis(hdl.getTagesInformationen(datum).durchschnittsTagesPreis(), anz);
             getAktie(hdl.getName()).setAnzahl(getAktie(hdl.getName()).getAnzahl() + anz);
         }
+
+        investitionsBetragDepot();
     }
+
 
     // TODO: 04.08.20 Wert
     /**
      * Wert Depot double.
-     *
-     * @return Wert vom Depot
      */
-    public double wertDepot()
+    public void investitionsBetragDepot()
     {
-        double wert = 0;
+        this.investition = 0;
 
         for (Aktie a : this.depot)
         {
-            wert += a.getPreis() * a.getAnzahl();
-
+            this.investition += a.getPreis() * a.getAnzahl();
         }
-        return wert;
     }
 
     /**
@@ -120,13 +121,18 @@ public class Depot
         return zaehler;
     }
 
+    public double getInvestition()
+    {
+        return investition;
+    }
+
     /**
      * überprüft ob die Aktie im Depot vorhanden ist boolean.
      *
      * @param name Name der Aktie
      * @return the boolean true wenn vorhanden, false wenn nicht
      */
-    public boolean aktieIstNichtVorhanden(String name)
+    private boolean aktieIstNichtVorhanden(String name)
     {
         for (Aktie a : this.depot)
         {
@@ -147,6 +153,22 @@ public class Depot
         {
             if (a.getName().equals(name)) return a;
         }
-        throw new AktieNichtVorhanden("Aktie mit dem namen" + name + "ist nicht vorhanden");
+        throw new AktieNichtVorhanden("Aktie mit dem namen " + name + " ist nicht im Depot vorhanden vorhanden");
+    }
+
+    public double depotWertZumZeitpunkt(String datum, Database datenbasis) throws DatumFehler, TagesInformationenNichtVorhanden
+    {
+        double wert = 0;
+
+        for (Aktie a : this.depot)
+        {
+            HistorischeDatenListe hdl = datenbasis.getHistorischeDatenListeAusDatenBasis(a.getName());
+            double preis = hdl.getTagesInformationen(datum).durchschnittsTagesPreis();
+
+            //Wert = (anzahl * durchschnitts Kaufpreis) - (anzahl * preis zum Datum x)
+            wert += (a.getAnzahl() * a.getPreis()) - (a.getAnzahl() * preis);
+
+        }
+        return wert;
     }
 }

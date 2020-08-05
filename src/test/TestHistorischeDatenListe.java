@@ -1,5 +1,6 @@
 package test;
 
+import error.AktieNichtVorhanden;
 import error.DatumFehler;
 import error.FehlerCSVInhalt;
 import error.TagesInformationenNichtVorhanden;
@@ -18,12 +19,13 @@ class TestHistorischeDatenListe
     @org.junit.jupiter.api.BeforeEach
     void setUp() throws IOException, FehlerCSVInhalt
     {
-        daimler = new HistorischeDatenListe(new File("/Users/Finn/IdeaProjects/Aktien/DAI.DE.csv"));
+        daimler = new HistorischeDatenListe(new File("/Users/Finn/IdeaProjects/Aktien/src/test/DAI.DE.csv"));
     }
 
     @org.junit.jupiter.api.Test
     void ausgabeHistorischeDatenListeKonsole()
     {
+        daimler.ausgabeHistorischeDatenListeKonsole();
     }
 
     @org.junit.jupiter.api.Test
@@ -32,25 +34,33 @@ class TestHistorischeDatenListe
         TagesInfo referenzObj = new TagesInfo("2019-08-06",44.145000,43.279999,
                 44.305000,43.215000,4018085);
         TagesInfo tagesInfo1;
-
         tagesInfo1 = daimler.getTagesInformationen("2019-08-06");
         assertEquals(tagesInfo1, referenzObj);
+        //Erwarte DatumFehler Exception dar das Datum nicht das richtige Format besitzt
+        try
+        {
+            daimler.getTagesInformationen("19-20-2020");
+        }
+        catch (DatumFehler e)
+        {
+            System.out.println(e.getMessage());
+        }
+
+        //Erwarte TagesInformationenNichtVorhanden Exception
+        try
+        {
+            daimler.getTagesInformationen("2021-01-01");
+        }
+        catch (TagesInformationenNichtVorhanden e)
+        {
+            System.out.println(e.getMessage());
+        }
+
+
 
 
     }
-
-   /* todo Funktioniert nicht mehr da Private
-    @org.junit.jupiter.api.Test
-    void eingabeDatumUeberpruefen()
-    {
-        assertTrue(HistorischeDatenListe.eingabeDatumUeberpruefen("2020-12-12"));
-        assertFalse(HistorischeDatenListe.eingabeDatumUeberpruefen("12-12-20"));
-        assertFalse(HistorischeDatenListe.eingabeDatumUeberpruefen("12-2020-12"));
-        assertFalse(HistorischeDatenListe.eingabeDatumUeberpruefen("12-12"));
-    }
-    */
-
-
+    //todo Funktioniert nicht mehr da Private
     @org.junit.jupiter.api.AfterEach
     void tearDown()
     {
