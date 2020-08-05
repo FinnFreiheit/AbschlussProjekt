@@ -1,5 +1,7 @@
 package Model;
 
+import CSVIO.LesenCSVKaufHistorie;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -34,17 +36,20 @@ public class KaufHistorie
     public Depot depotErstellen(Database datenbasis) throws IOException
     {
         Depot depot = new Depot();
-
-
         for (Transaktion t : this.kaufHistorie)
         {
             HistorischeDatenListe historischeDatenListe;
             historischeDatenListe = datenbasis.getHistorischeDatenListeAusDatenBasis(t.aktienName);
-            if(t.handelsAktion)
+            if (t.handelsAktion)
             {
-                depot.hinzufuegen(t.datum, t.anzahl, historischeDatenListe);
+                depot.kaufen(t.datum, t.anzahl, historischeDatenListe);
             }
+            else
+            {
+                depot.verkaufen(historischeDatenListe.getTagesInformationen(t.datum).durchschnittsTagesPreis(),
+                        t.anzahl, historischeDatenListe.getName());
 
+            }
         }
         return depot;
     }

@@ -2,7 +2,9 @@
  * Die Klasse Lesen CSV dient dazu eine CSV Datei einzulesen.
  * Die Informationen werden in der ArrayListe HistorischeDatenListe gespeichert.
  */
-package Model;
+package CSVIO;
+import Model.TagesInfo;
+
 import java.io.*;
 import java.util.*;
 import java.util.regex.Pattern;

@@ -1,4 +1,6 @@
-package Model;
+package CSVIO;
+
+import Model.Transaktion;
 
 import java.io.*;
 import java.util.ArrayList;

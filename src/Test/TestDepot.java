@@ -32,26 +32,19 @@ class TestDepot
     @Test
     void loeschen() throws IOException
     {
-        meinDepot.hinzufuegen("2019-08-06",10,daimler);
-        assertEquals(10,meinDepot.getAnzahlAktien());
-        meinDepot.hinzufuegen("2019-08-06",10,daimler);
-        assertEquals(20,meinDepot.getAnzahlAktien());
-        meinDepot.loeschen("2019-08-06", 5,"DAI.DE");
-        assertEquals(15,meinDepot.getAnzahlAktien());
-        meinDepot.loeschen("2019-08-06", 14,"DAI.DE");
-        assertEquals(1,meinDepot.getAnzahlAktien());
+
     }
 
     @Test
     void hinzufuegen() throws IOException
     {
-        meinDepot.hinzufuegen("2019-08-06",10,daimler);
+        meinDepot.kaufen("2019-08-06",10,daimler);
     }
 
     @Test
     void wertDepot() throws IOException
     {
-        meinDepot.hinzufuegen("2019-08-06",10,daimler);
+        meinDepot.kaufen("2019-08-06",10,daimler);
         assertEquals(437.6,meinDepot.wertDepot());
 
     }
@@ -59,14 +52,14 @@ class TestDepot
     @Test
     void ausgabeDepot() throws IOException
     {
-        meinDepot.hinzufuegen("2019-08-06",10,daimler);
+        meinDepot.kaufen("2019-08-06",10,daimler);
         meinDepot.ausgabeDepot();
     }
 
     @Test
     void getAnzahlAktien() throws IOException
     {
-        meinDepot.hinzufuegen("2019-08-06",10,daimler);
+        meinDepot.kaufen("2019-08-06",10,daimler);
         assertEquals(10,meinDepot.getAnzahlAktien());
     }
 }

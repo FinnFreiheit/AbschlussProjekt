@@ -1,4 +1,7 @@
-package Model;
+package CSVIO;
+
+import Model.HistorischeDatenListe;
+import Model.TagesInfo;
 
 import java.io.BufferedWriter;
 import java.io.File;

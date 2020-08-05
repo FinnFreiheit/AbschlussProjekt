@@ -28,13 +28,24 @@ public class Depot
     /**
      * Loeschen.
      *
-     * @param datum the datum
+     * @param preis verkaufspreis
      * @param anz   the anz
      * @param name  the name
      * @throws IOException the io exception
      */
-    public void loeschen(String datum, int anz, String name) throws IOException
+    public void verkaufen(double preis, int anz, String name) throws IOException
     {
+        if(!aktieIstVorhanden(name))
+        {
+            // TODO: 05.08.20 Eigene Exception
+            System.out.println("Fehler Aktie nicht vorhanden");
+            throw new IOException();
+        }
+        else
+        {
+          getAktie(name).setPreis(preis,-anz);
+          getAktie(name).setAnzahl(getAktie(name).getAnzahl() - anz);
+        }
 
     }
 
@@ -48,12 +59,10 @@ public class Depot
      * @param hdl   Die historischen Kursdaten, der Aktie. Anhand der Liste und des Datums wird der Preis ermittelt
      * @throws IOException the io exception wenn das Datum nicht vorhanden ist, oder falsch.
      */
-    public void hinzufuegen(String datum, int anz, HistorischeDatenListe hdl) throws IOException
+    public void kaufen(String datum, int anz, HistorischeDatenListe hdl) throws IOException
     {
-        boolean temp = aktieIstVorhanden(hdl.getName());
-
         //Wenn die Aktie noch nicht im depot vorhanden ist, wird ein neues Objekt der Klasse Aktie erzeugt
-        if (!temp)
+        if (!aktieIstVorhanden(hdl.getName()))
         {
             Aktie aktie;
             aktie = new Aktie(hdl.getTagesInformationen(datum), hdl.getName(), anz);
@@ -140,6 +149,4 @@ public class Depot
         }
         return null;
     }
-
-
 }
