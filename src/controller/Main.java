@@ -18,9 +18,11 @@ public class Main
     static File infineonFile = new File("/Users/Finn/IdeaProjects/Aktien/src/Database/IFX.DE.csv");
     static File kaufHistorieFile = new File("/Users/Finn/IdeaProjects/Aktien/src/Database/KaufHistorie.csv");
     static File schreibeFile = new File("/Users/Finn/IdeaProjects/Aktien/src/Test/DaimlerTestSChreiben.csv");
+
     //__________________________________________________________________________________________________________________
     //Main Methode
-    public static void main(String[] args) throws IOException, DatumFehler, AktieNichtVorhanden, TagesInformationenNichtVorhanden, FehlerCSVInhalt
+    public static void main(String[] args)
+            throws IOException, DatumFehler, AktieNichtVorhanden, TagesInformationenNichtVorhanden, FehlerCSVInhalt
     {
         HistorischeDatenListe daimler = new HistorischeDatenListe(daimlerFile);
         HistorischeDatenListe siemens = new HistorischeDatenListe(siemensFile);
@@ -36,11 +38,8 @@ public class Main
         Depot meinDepot = kaufHistorie.depotErstellen(datenbasis);
 
         System.out.println("______________________________");
-        meinDepot.ausgabeDepot();
-        System.out.println(meinDepot.getInvestition());
-
-
-
+        //meinDepot.ausgabeDepot();
+        //System.out.println(meinDepot.getInvestition());
 
 
         //daimler.ausgabeHistorischeDatenListeKonsole();
@@ -63,7 +62,6 @@ public class Main
         meinDepot.loeschen("2019-08-06", 15,"DAI.DE");
         meinDepot.ausgabeDepot();
         */
-
 
 
     }
