@@ -13,10 +13,11 @@ public class GenerateCSV
 		// Zugriff auf finance.yahoo vorbereiten
 		long currentTime = Instant.now().getEpochSecond(); 
 		long time6MonthsAgo = currentTime - 15552000;
-		String daily = "1d";
+		long time1YearAgo = currentTime - (2*time6MonthsAgo);
+				String daily = "1d";
 		// Beispiel: "https://query1.finance.yahoo.com/v7/finance/download/SIE.DE?period1=1583280000&period2=1596499200&interval=1d&events=history";
 		String url = "https://query1.finance.yahoo.com/v7/finance/download/" + key +
-					"?period1=" + Long.toString(time6MonthsAgo) + 
+					"?period1=" + Long.toString(time1YearAgo) +
 					"&period2=" + Long.toString(currentTime) + 
 					"&interval=" + daily + 
 					"&events=history";

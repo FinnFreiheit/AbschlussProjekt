@@ -19,7 +19,7 @@ public class HistorischeDatenListe
 
     //Objekt Variablen
     // TODO: 01.08.20 private -> problem bei Schreiben CSV
-    public ArrayList<TagesInfo> historischeDatenListe = new ArrayList<TagesInfo>();
+    public ArrayList<TagesInfo> historischeDatenListe = new ArrayList<>();
     private String name;
 
 

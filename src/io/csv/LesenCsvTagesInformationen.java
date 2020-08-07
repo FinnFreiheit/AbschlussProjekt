@@ -23,9 +23,20 @@ public class LesenCsvTagesInformationen
             String zeile;
             //Erste zeile von CSV Datei wird nicht benoetigt.
             reader.readLine();
+            boolean speicherFehler = false;
             while((zeile = reader.readLine()) != null)
             {
-                tagesInfoListe.add(speicherInhaltZeileInTagesinfo(zeile));
+                speicherFehler = true;
+                try {
+                    TagesInfo ti = speicherInhaltZeileInTagesinfo(zeile);
+                    speicherFehler = false;
+                }
+                catch(FehlerCSVInhalt e)
+                {
+                    System.err.println(e.getMessage());
+                }
+                if(!speicherFehler) tagesInfoListe.add(speicherInhaltZeileInTagesinfo(zeile));
+
             }
         }
         return tagesInfoListe;
