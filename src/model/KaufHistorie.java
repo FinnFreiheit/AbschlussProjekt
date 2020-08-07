@@ -82,15 +82,17 @@ public class KaufHistorie
 
 
             depot.ausgabeDepot();
-            System.out.println("Investiert: " + depot.getInvestition() + euro);
+            System.out.println("Investiert: " + String.format("%.2f",depot.getInvestition()) + euro);
             if (depot.depotWertZumZeitpunkt(t.datum, datenbasis) >= 0)
             {
                 System.out.println(
-                        GREEN + "Gewinn: " + depot.depotWertZumZeitpunkt(t.datum, datenbasis) + euro + RESET);
+                        GREEN + "Gewinn: " + String.format("%.2f",depot.depotWertZumZeitpunkt(t.datum, datenbasis))  +
+                                                                   euro + RESET);
             }
             else
             {
-                System.out.println(RED + "Verlust: " + depot.depotWertZumZeitpunkt(t.datum, datenbasis) + euro + RESET);
+                System.out.println(RED + "Verlust: " + String.format("%.2f",depot.depotWertZumZeitpunkt(t.datum,
+                                                                                                  datenbasis)) + euro + RESET);
             }
             System.out.println("___________________________________");
 
