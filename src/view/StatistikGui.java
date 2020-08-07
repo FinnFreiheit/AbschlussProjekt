@@ -1,4 +1,4 @@
-package gui;
+package view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -150,7 +150,7 @@ public class StatistikGui extends JPanel
 	// alle Daten aus einer Datei - key ist Aktienkuerzel
 	public String[][] getDataKey(String key)
 	{
-		String fileName = "./resources/" + key + ".csv";
+		String fileName = "./database/" + key + ".csv";
 		List<List<String>> records = new ArrayList<List<String>>();
 		try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
 		    String line;
@@ -178,7 +178,7 @@ public class StatistikGui extends JPanel
 		
 		for(String key : keys)
 		{
-			String fileName = "./resources/" + key + ".csv";
+			String fileName = "./database/" + key + ".csv";
 			try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
 			    String line;
 			    line = br.readLine();
@@ -201,7 +201,7 @@ public class StatistikGui extends JPanel
 	
 	public String[] getTitlesKey(String key)
 	{
-		String fileName = "./resources/" + key + ".csv";
+		String fileName = "database/" + key + ".csv";
 		try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
 		    String line;
 		    line = br.readLine();

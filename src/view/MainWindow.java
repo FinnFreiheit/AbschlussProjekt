@@ -1,4 +1,4 @@
-package gui;
+package view;
 
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
@@ -24,21 +24,20 @@ public class MainWindow extends JFrame
 	public JTabbedPane createTabPanel()
 	{
 		JTabbedPane tabbedPane = new JTabbedPane();
-		
+
 		JPanel tab1 = new LoadCSVGui();
- 
-        JPanel tab2 = new KaufenGui();
-        
-        JPanel tab3 = new JPanel();
-        tab3.add(new JTextField("TextField", 20));
-        
-        JPanel tab4 = new StatistikGui();
- 
-        tabbedPane.addTab("Aktieninfos laden", tab1);
-        tabbedPane.addTab("Aktien kaufen", tab2);
-        tabbedPane.addTab("Aktien verkaufen", tab3);
-        tabbedPane.addTab("Statistik", tab4);
-        
+
+		JPanel tab2 = new KaufenGui();
+
+		JPanel tab3 = new ConsoleGui();
+
+		JPanel tab4 = new StatistikGui();
+
+		tabbedPane.addTab("Aktieninfos laden", tab1);
+		tabbedPane.addTab("Aktien kaufen/verkaufen", tab2);
+		tabbedPane.addTab("Depot Ausgabe", tab3);
+		tabbedPane.addTab("Statistik", tab4);
+
 		return tabbedPane;
 	}
 	

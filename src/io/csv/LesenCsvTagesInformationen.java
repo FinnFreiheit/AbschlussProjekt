@@ -13,7 +13,7 @@ import java.util.*;
 public class LesenCsvTagesInformationen
 {
 
-    static File file = new File("/Users/Finn/IdeaProjects/Aktien/DAI.DE.csv");
+    static File file = new File("/database/DAI.DE.csv");
 
     public static ArrayList<TagesInfo> lesenCSV(File file) throws IOException, FehlerCSVInhalt
     {
@@ -36,9 +36,13 @@ public class LesenCsvTagesInformationen
     {
         String[] getrennteZeile = zeile.split(",");
 
-        if(getrennteZeile.length != 7) throw new FehlerCSVInhalt("In der CSV-Datei einer Aktie gibt es ein " +
+        if(getrennteZeile.length != 7) throw new FehlerCSVInhalt("In der CSV-Datei einer Aktie gibt es einen " +
                 "inhaltlichen Fehler. Anstatt von 7 Informationen pro Zeile sind " + getrennteZeile.length +
                 " vorhanden");
+
+        // die csv-Dateien enthalten fuer den 20.Juli 2020 null-Eintraege
+        if(getrennteZeile[1].equals("null")) throw new FehlerCSVInhalt("in der CSV-Datei sind fuer das Datum " + getrennteZeile[0] +
+                " null-Eintraege enthalten");
 
         String datum = getrennteZeile[0];
         double open = Double.parseDouble(getrennteZeile[1]);

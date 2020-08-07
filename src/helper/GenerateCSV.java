@@ -25,11 +25,12 @@ public class GenerateCSV
 		InputStream inputstream = null;
 
 		// Datei, in die geschrieben werden soll
-		String targetFileName = "./resources/"+key+".csv";
+		String targetFileName = "./database/"+key+".csv";
 		File targetFile = null;
 		try 
 		{
 			targetFile = new File(targetFileName);
+			// nur für DEBUG Zwecke - kann ausgeschaltet werden
 			if (targetFile.createNewFile()) 
 			{
 		        System.out.println("File created: " + targetFile.getName());

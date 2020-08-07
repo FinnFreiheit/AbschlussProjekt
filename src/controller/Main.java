@@ -1,9 +1,13 @@
-package model;
+package controller;
 
 import error.AktieNichtVorhanden;
 import error.DatumFehler;
 import error.FehlerCSVInhalt;
 import error.TagesInformationenNichtVorhanden;
+import model.Database;
+import model.Depot;
+import model.HistorischeDatenListe;
+import model.KaufHistorie;
 
 import java.io.File;
 import java.io.IOException;
@@ -13,17 +17,24 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 // TODO: 05.08.20 Format ausgabe auf zwei Nachkommastellen
 public class Main
 {
-    static File daimlerFile = new File("/Users/Finn/IdeaProjects/Aktien/src/Database/DAI.DE.csv");
-    static File siemensFile = new File("/Users/Finn/IdeaProjects/Aktien/src/Database/SIE.DE.csv");
-    static File infineonFile = new File("/Users/Finn/IdeaProjects/Aktien/src/Database/IFX.DE.csv");
-    static File kaufHistorieFile = new File("/Users/Finn/IdeaProjects/Aktien/src/Database/KaufHistorie.csv");
-    static File schreibeFile = new File("/Users/Finn/IdeaProjects/Aktien/src/Test/DaimlerTestSChreiben.csv");
+    static File daimlerFile = new File("database/DAI.DE.csv");
+    static File siemensFile = new File("database/SIE.DE.csv");
+    static File infineonFile = new File("database/IFX.DE.csv");
+    static File kaufHistorieFile = new File("database/KaufHistorie.csv");
+    static File schreibeFile = new File("./test/DaimlerTestSChreiben.csv");
 
     //__________________________________________________________________________________________________________________
     //Main Methode
     public static void main(String[] args)
             throws IOException, DatumFehler, AktieNichtVorhanden, TagesInformationenNichtVorhanden, FehlerCSVInhalt
     {
+        // GUI starten
+        javax.swing.SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                new view.MainWindow();
+            }
+        });
+
         HistorischeDatenListe daimler = new HistorischeDatenListe(daimlerFile);
         HistorischeDatenListe siemens = new HistorischeDatenListe(siemensFile);
         HistorischeDatenListe infineon = new HistorischeDatenListe(infineonFile);
