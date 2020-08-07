@@ -63,7 +63,7 @@ public class Aktie
     /**
      * Get preis.
      *
-     * @return  preis
+     * @return preis
      */
     public double getPreis()
     {
@@ -73,7 +73,7 @@ public class Aktie
     /**
      * Gets name.
      *
-     * @return  name
+     * @return name
      */
     public String getName()
     {
@@ -93,9 +93,10 @@ public class Aktie
 
         this.preis = (neuerWert / (this.anzahl + anz));
     }
+
     @Override
     public String toString()
     {
-        return this.name + " " + this.anzahl + " " + this.preis;
+        return String.format("%-15s %-18d %.2f%s",this.name, this.anzahl, this.preis,"\u20ac");
     }
 }

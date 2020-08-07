@@ -37,27 +37,61 @@ public class KaufHistorie
      * @return das Depot
      * @throws DatumFehler the io exception bei einem fehler mit dem Datum
      */
-    public Depot depotErstellen(Database datenbasis) throws DatumFehler, AktieNichtVorhanden, TagesInformationenNichtVorhanden
+    public Depot depotErstellen(Database datenbasis)
+            throws DatumFehler, AktieNichtVorhanden, TagesInformationenNichtVorhanden
     {
+        final String RED = "\u001B[31m";
+        final String RESET = "\u001B[0m";
+        final String GREEN = "\u001B[32m";
+
+        String euro = "\u20ac";
+
+
         Depot depot = new Depot();
         for (Transaktion t : this.kaufHistorie)
         {
+            System.out.println("___________________________________");
+
+            System.out.println("Datum " + t.datum);
+
             HistorischeDatenListe historischeDatenListe;
             historischeDatenListe = datenbasis.getHistorischeDatenListeAusDatenBasis(t.aktienName);
             if (t.handelsAktion)
             {
                 depot.kaufen(t.datum, t.anzahl, historischeDatenListe);
+
+                System.out.println("Die Aktie " + t.aktienName + " wurde für " + String.format("%.2f",
+                                                                                               historischeDatenListe.getTagesInformationen(
+                                                                                                       t.datum)
+                                                                                                                    .durchschnittsTagesPreis()) +
+                                           euro + " gekauft");
+
             }
             else
             {
-                depot.verkaufen(historischeDatenListe.getTagesInformationen(t.datum).durchschnittsTagesPreis(), t.anzahl, historischeDatenListe.getName());
+                depot.verkaufen(historischeDatenListe.getTagesInformationen(t.datum).durchschnittsTagesPreis(),
+                                t.anzahl, historischeDatenListe.getName());
+
+                System.out.println("Die Aktie " + t.aktienName + " wurde für " + String.format("%.2f",
+                                                                                               historischeDatenListe.getTagesInformationen(
+                                                                                                       t.datum)
+                                                                                                                    .durchschnittsTagesPreis()) +
+                                           euro + " verkauft");
+
             }
 
-            System.out.println("___________________________________");
-            System.out.println("Datum : " + t.datum);
+
             depot.ausgabeDepot();
-            System.out.println("Invest " + depot.getInvestition());
-            System.out.println("Gewinn / Verlust " + depot.depotWertZumZeitpunkt(t.datum,datenbasis));
+            System.out.println("Investiert: " + depot.getInvestition() + euro);
+            if (depot.depotWertZumZeitpunkt(t.datum, datenbasis) >= 0)
+            {
+                System.out.println(
+                        GREEN + "Gewinn: " + depot.depotWertZumZeitpunkt(t.datum, datenbasis) + euro + RESET);
+            }
+            else
+            {
+                System.out.println(RED + "Verlust: " + depot.depotWertZumZeitpunkt(t.datum, datenbasis) + euro + RESET);
+            }
             System.out.println("___________________________________");
 
         }

@@ -100,10 +100,15 @@ public class Depot
      */
     public void ausgabeDepot()
     {
+        System.out.println("Im Depot befinden sich folgende Aktien: ");
+        System.out.println("");
+        System.out.println(String.format("%-10s, %-10s, %-10s","Name der Aktie","Anzahl der Aktien",
+                                         "Durchschnittskaufpreis"));
         for (Aktie a : this.depot)
         {
             System.out.println(a.toString());
         }
+        System.out.println();
     }
 
     /**
