@@ -18,6 +18,7 @@ public class LesenCSVKaufHistorie
 
             while((zeile = reader.readLine()) != null)
             {
+                if(!zeile.isEmpty())  // letzte Zeile nach Zeilenumbruch
                 transaktionenListe.add(speicherInhaltZeileInTransaktionen(zeile));
             }
         }
@@ -29,7 +30,7 @@ public class LesenCSVKaufHistorie
         String[] getrennteZeile = zeile.split(",");
 
         if(getrennteZeile.length != 4) throw new FehlerCSVInhalt("In der CSV-Datei Kaufhistorie gibt es ein " +
-                "inhaltlichen Fehler. Anstatt von 4 Informationen pro Zeile sind " + getrennteZeile.length +
+                "inhaltlichen Fehler. Anstatt 4 Informationen pro Zeile sind " + getrennteZeile.length +
                 " vorhanden");
 
         String datum = getrennteZeile[0];

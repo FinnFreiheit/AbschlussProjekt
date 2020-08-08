@@ -4,9 +4,7 @@ import error.AktieNichtVorhanden;
 import error.DatumFehler;
 import error.FehlerCSVInhalt;
 import error.TagesInformationenNichtVorhanden;
-import model.Dax;
-import model.Depot;
-import model.HistorischeDatenListe;
+import model.*;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
@@ -183,6 +181,18 @@ public class TradingPanelFactory extends JPanel
                                 aktieNichtVorhanden.printStackTrace();
                             }
                             break;
+                    }
+                    Database datenbasis = Database.generateDatabase();
+                    File kaufHistorieFile = new File("database/KaufHistorie.csv");
+                    KaufHistorie kaufHistorie = new KaufHistorie(kaufHistorieFile);
+                    try {
+                        TradingPanelFactory.this.depot = kaufHistorie.depotErstellen(datenbasis);
+                    } catch (DatumFehler datumFehler) {
+                        datumFehler.printStackTrace();
+                    } catch (AktieNichtVorhanden aktieNichtVorhanden) {
+                        aktieNichtVorhanden.printStackTrace();
+                    } catch (TagesInformationenNichtVorhanden tagesInformationenNichtVorhanden) {
+                        tagesInformationenNichtVorhanden.printStackTrace();
                     }
                 }
                 catch (IOException ioe)

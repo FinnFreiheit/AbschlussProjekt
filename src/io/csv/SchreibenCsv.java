@@ -14,7 +14,7 @@ import java.util.List;
 public class SchreibenCsv
 {
     static String ersteZeile = "Datum,open,high,low,close";
-    public static void SchreibeCSV(HistorischeDatenListe historischeDatenListe, File file)
+    public static void schreibeCSV(HistorischeDatenListe historischeDatenListe, File file)
     {
         try(BufferedWriter writer = new BufferedWriter(new FileWriter(file)))
         {
