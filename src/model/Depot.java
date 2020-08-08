@@ -28,8 +28,8 @@ public class Depot
     }
 
     /**
-     * Loeschen.
-     *
+     * Verkaufen
+     * @param datum Das Datum an dem eine Aktie verkauft wurde.
      * @param preis verkaufspreis
      * @param anz   the anz
      * @param name  the name
@@ -47,7 +47,7 @@ public class Depot
           this.getAktie(name).setPreis(preis,-anz);
           this.getAktie(name).setAnzahl(getAktie(name).getAnzahl() - anz);
         }
-        SchreibenCsv.schreibeKaufen(datum, name, String.valueOf(anz));
+        SchreibenCsv.schreibeVerkaufen(datum, name, String.valueOf(anz));
         this.investitionsBetragDepot();
     }
 

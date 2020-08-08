@@ -30,7 +30,7 @@ public class TradingPanelFactory extends JPanel
     Depot depot;
     String titleFormular;
 
-    private final static boolean DEBUG = true;
+    private final static boolean DEBUG = false;
     private final static String PATH = "database/";
 
     public TradingPanelFactory(String titleFormular, String headLineFormular, String dateLabelFormular, Depot depot)

@@ -26,7 +26,7 @@ public class Main
             throws IOException, DatumFehler, AktieNichtVorhanden, TagesInformationenNichtVorhanden, FehlerCSVInhalt
     {
         System.out.printf("%n%n------ 1. alle csv-Dateien laden ------%n%n");
-        // GenerateCSV.loadCSV();
+        GenerateCSV.loadCSV();
 
         System.out.printf("%n%n------ 2. Datenbasis erstellen --------%n%n");
         Database datenbasis = Database.generateDatabase();
