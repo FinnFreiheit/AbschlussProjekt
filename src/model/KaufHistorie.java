@@ -10,20 +10,25 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
+
 /**
  * Die Kaufhistorie beinhaltet alle Transaktionen, die der Nutzer getätigt hat.
  * Die Kaufhistorie besteht aus einer Liste aus Transaktionen.
  */
 public class KaufHistorie
 {
-    //Objektvariablen
+    /**
+     * The Kauf historie.
+     */
+//Objektvariablen
     public ArrayList<Transaktion> kaufHistorie;
 
     /**
      * Konstruktor
      *
      * @param file Die Transaktionen werden aus einer CSV Datei eingelesen.
-     * @throws IOException the io exception bei fehler mit der Datei
+     * @throws IOException     the io exception bei fehler mit der Datei
+     * @throws FehlerCSVInhalt the fehler csv inhalt
      */
     public KaufHistorie(File file) throws IOException, FehlerCSVInhalt
     {
@@ -35,7 +40,9 @@ public class KaufHistorie
      *
      * @param datenbasis die Datenbasis
      * @return das Depot
-     * @throws DatumFehler the io exception bei einem fehler mit dem Datum
+     * @throws DatumFehler                      the io exception bei einem fehler mit dem Datum
+     * @throws AktieNichtVorhanden              the aktie nicht vorhanden
+     * @throws TagesInformationenNichtVorhanden the tages informationen nicht vorhanden
      */
     public Depot depotErstellen(Database datenbasis)
             throws DatumFehler, AktieNichtVorhanden, TagesInformationenNichtVorhanden

@@ -15,6 +15,7 @@ public class Database
     //Objekt Variablen
     private ArrayList<HistorischeDatenListe> datenBasis;
     final static String PATH = "database/";
+
     /**
      * Konstruktor
      */

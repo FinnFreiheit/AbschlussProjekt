@@ -15,13 +15,28 @@ import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-// TODO: 05.08.20 Format ausgabe auf zwei Nachkommastellen
+
+/**
+ * Die Klasse Main beinhaltet die main Methode, über die das Programm gestartet wird.
+ */
 public class Main
 {
+    /**
+     * Die CSV Datei, die informationen über die Transaktionen des Anwenders beinhaltet, muss vom Anwender in den
+     * Ordner database gelegt werden.
+     */
     static File kaufHistorieFile = new File("database/KaufHistorie.csv");
 
-    //__________________________________________________________________________________________________________________
-    //Main Methode
+    /**
+     * Startmethode des Programmes.
+     *
+     * @param args input Argumente
+     * @throws IOException                      input, output Exceptions
+     * @throws DatumFehler                      Exception bei einem Fehler mit einem Datum
+     * @throws AktieNichtVorhanden              Exception wenn eine Aktie nicht vorhanden ist
+     * @throws TagesInformationenNichtVorhanden Exception wenn Tagesinformationen nicht vorhanden sind
+     * @throws FehlerCSVInhalt                 Exception wenn der inhalt einer CSV Datei fehlerhaft ist.
+     */
     public static void main(String[] args)
             throws IOException, DatumFehler, AktieNichtVorhanden, TagesInformationenNichtVorhanden, FehlerCSVInhalt
     {
@@ -45,32 +60,7 @@ public class Main
         });
 
         System.out.println("______________________________");
-        //meinDepot.ausgabeDepot();
-        //System.out.println(meinDepot.getInvestition());
-
-
-        //daimler.ausgabeHistorischeDatenListeKonsole();
-        //SchreibenCsv.SchreibeCSV(daimler,schreibeFile);
-        //System.out.println(daimler.getTagesInformationen("2019-08-06").toString());
-
-
         System.out.println("_____________");
-
-       /* meinDepot.hinzufuegen("2019-08-06",10,daimler);
-        System.out.println(meinDepot.getAnzahlAktien());
-        meinDepot.ausgabeDepot();
-        meinDepot.hinzufuegen("2019-08-06",10,daimler);
-        System.out.println(meinDepot.getAnzahlAktien());
-        meinDepot.ausgabeDepot();
-        meinDepot.loeschen("2019-08-06", 5,"DAI.DE");
-        System.out.println(meinDepot.getAnzahlAktien());
-        meinDepot.ausgabeDepot();
-        meinDepot.hinzufuegen("2019-08-07",1,daimler);
-        meinDepot.loeschen("2019-08-06", 15,"DAI.DE");
-        meinDepot.ausgabeDepot();
-        *//*
-
-*/
     }
 
 

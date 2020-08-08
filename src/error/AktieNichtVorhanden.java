@@ -1,9 +1,12 @@
 package error;
 
+/**
+ * Exception wenn eine Aktie nicht vorhanden ist
+ */
 public class AktieNichtVorhanden extends Exception
 {
     /**
-     * Exception wenn eine Aktie nicht vorhanden ist
+     * Konstruktor
      * @param message Fehlernachricht
      */
     public AktieNichtVorhanden(String message)

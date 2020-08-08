@@ -41,7 +41,7 @@ public class Aktie
     }
 
     /**
-     * Get anzahl.
+     * gibt die Anzahl der Aktien zurück
      *
      * @return the anzahl
      */
@@ -51,7 +51,7 @@ public class Aktie
     }
 
     /**
-     * Set anzahl.
+     * Setzt die Anzahl der Aktien auf ein int bestimmten Wert.
      *
      * @param anzahl zu setzende Anzahl
      */
@@ -61,7 +61,7 @@ public class Aktie
     }
 
     /**
-     * Get preis.
+     * gibt den Preis der Aktie zurück.
      *
      * @return preis
      */
@@ -71,7 +71,7 @@ public class Aktie
     }
 
     /**
-     * Gets name.
+     * gibt den Namen der Aktie zurück.
      *
      * @return name
      */
@@ -81,7 +81,7 @@ public class Aktie
     }
 
     /**
-     * Sets preis.
+     * Setzt den Preis auf ein bestimmten double wert.
      *
      * @param preis Preis der Aktien
      * @param anz   anzahl der Aktien
@@ -94,6 +94,10 @@ public class Aktie
         this.preis = (neuerWert / (this.anzahl + anz));
     }
 
+    /**
+     * Fügt alle Objektvariablen in einen String zusammen und gibt diesen zurück
+     * @return Alle Objektvariablen in einem String
+     */
     @Override
     public String toString()
     {

@@ -8,17 +8,25 @@ import java.nio.file.StandardCopyOption;
 import java.time.Instant;
 import java.util.Map;
 
+/**
+ * Die historischen Kursdaten vom letztem Jahr, aller im Deutschen Leitindex (DAX) enthaltenden Unternehmen werden aus
+ * dem internet geladen und in CSV Dateien Geschrieben. Die CSV Datein werden im Ordner database gespeichert.
+ * Der Name der CSV Datei entspricht dem Kürzel der Aktie mit der Endung .csv BSP.: DAI.csv oder SIE.csv
+ */
 public class GenerateCSV
 {
 	final static boolean DEBUG = false;  // Zum Ein- und Ausschalten von Ausgaben
+	//Hier wird der Ordner angegeben in dem die CSV Dateien gespeichert werden sollen
 	final static String TARGETPATH = "database/";
 
 	/**
-	 * laedt alle Aktioninformationen aller Dax-Werte aus finance.yahoo und
-	 * speichert als csv-Datein im database-Ordner
+	 * Ruft für jede Aktie im DAX die methode loadCSV(Key) auf und  erstellt somit die csv Dateien.
+	 * todo Vorbedingung Internet zugriff
+	 * todo nachbedingung vorhandene CSV dateien
 	 */
 	public static void loadCSV()
 	{
+		// Map<Kürzel, Name>
 		Map<String, String> dax = Dax.getDax();
 		for(String key: dax.keySet())
 		{
@@ -28,6 +36,12 @@ public class GenerateCSV
 		}
 	}
 
+	/**
+	 * Anhand vom key (Aktienkürzel) wird eine URL erstellt, mit der man die historischen Kursdaten vom letzten Jahr
+	 * aus dem Internet laden kann. Die Kursdaten werden dann in einer CSV Datei gespeichert und im Ordner database
+	 * abgelegt.
+	 * @param key Aktienkürzel mit dem die URL erstellt wird
+	 */
 	private static void loadCSV(String key)
 	{
 		// Zugriff auf finance.yahoo vorbereiten

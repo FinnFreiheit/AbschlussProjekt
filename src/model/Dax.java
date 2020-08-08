@@ -3,10 +3,20 @@ package model;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * In dieser Klasse wird Definiert welche Unternehmen zum DAX gehören.
+ */
 public class Dax
 {
+	/**
+	 * Key: Aktienkürzel
+	 * Value: Aktienname
+	 */
 	static Map<String, String> dax = new HashMap<>();
-	
+
+	/**
+	 * Füllt die Map mit den entsprechenden keys und values aus dem DAX
+	 */
 	public static void fill()
 	{
 		dax.put("ADS.DE", "Adidas");
@@ -40,7 +50,12 @@ public class Dax
 		dax.put("TKA.DE", "ThyssenKrupp");  
 		dax.put("VOW3.DE", "Volkswagen (Vorzugsaktie)");  
 	}
-	
+
+	/**
+	 * Befüllt die Map und gibt sie als zurück.
+	 *
+	 * @return the dax
+	 */
 	public static Map<String, String> getDax()
 	{
 		Dax.fill();

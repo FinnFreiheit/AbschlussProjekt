@@ -1,9 +1,12 @@
 package error;
 
+/**
+ * Exception wenn Tagesinformationen nicht vorhanden sind.
+ */
 public class TagesInformationenNichtVorhanden extends Exception
 {
     /**
-     * Exception wenn Tagesinformationen nicht vorhanden sind.
+     * Konstruktor
      * @param message Fehlernachricht
      */
     public TagesInformationenNichtVorhanden(String message)

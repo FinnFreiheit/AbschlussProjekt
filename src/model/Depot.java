@@ -7,7 +7,6 @@ import io.csv.SchreibenCsv;
 
 import java.util.ArrayList;
 
-// TODO: 01.08.20 Depot in CSV Speichern
 /**
  * Das Depot ist eine Liste aus Aktien, und es besitzt ein gesammt Wert, der sich aus allen Aktien zusammensetzt.
  */
@@ -35,6 +34,9 @@ public class Depot
      * @param name  the name
      * @throws AktieNichtVorhanden Exception wenn die Aktie die Verkauft werden soll nicht
      * vorhanden ist.
+     * @pre man muss die Aktie besitzen wenn man sie Verkaufen möchte. Man kann nicht mehr Aktien verkaufen als man
+     * besitzt
+     * @inv Das Verkaufsdatum darf nicht in der Zukunft liegen.
      */
     public void verkaufen(String datum, double preis, int anz, String name) throws AktieNichtVorhanden
     {
@@ -60,6 +62,8 @@ public class Depot
      * @param anz   die Anzahl der gekauften Aktien
      * @param hdl   Die historischen Kursdaten, der Aktie. Anhand der Liste und des Datums wird der Preis ermittelt
      * @throws DatumFehler the io exception wenn das Datum nicht vorhanden ist, oder falsch.
+     * @pre die Börse war zum Kaufzeitpunkt geöffnet. Der Kauf ist nicht länger als ein Jahr her.
+     * @inv die Aktie stammt aus dem DAX
      */
     public void kaufen(String datum, int anz, HistorischeDatenListe hdl) throws DatumFehler, AktieNichtVorhanden, TagesInformationenNichtVorhanden
     {

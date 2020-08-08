@@ -11,9 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Eine historische Datenliste, beinhalten den Inhalt einer CSV Datei, von einer Aktie, einer Firma,
- * über einen gewissen Zeitraum.
- * Die historische Datenliste besteht aus Tagesinformationen und einem Namen.
+ * Eine historische Datenliste, beinhalten den Inhalt einer CSV Datei, von einer Aktie einer Firma, über einen
+ * gewissen Zeitraum.
+ * Die historische Datenliste besteht aus Tagesinformationen und dem Namen der Firma.
  */
 public class HistorischeDatenListe
 {
@@ -27,8 +27,12 @@ public class HistorischeDatenListe
     /**
      * Konstruktor
      *
-     * @param file das File der CSV Datei
+     * @param file das File der CSV Datei.
      * @throws IOException the io exception bei einem Fehler mit der Datei
+     * @pre CSV Datei besitzt das richtige Format.
+     * @post eine ArrayList mit alles wichtigen Tagesinformationen vom letzten Jahr
+     * @inv Die CSV Datei wurde unter dem richtigen Namen gespeichert, damit die Objektvariable "Name" richtig
+     * bestimmt werden kann.
      */
     public HistorischeDatenListe(File file) throws IOException, FehlerCSVInhalt
     {
@@ -38,7 +42,7 @@ public class HistorischeDatenListe
     }
 
     /**
-     * Ausgabe historische Datenliste auf die Konsole.
+     * Ausgabe der historische Datenliste auf die Konsole.
      */
     public void ausgabeHistorischeDatenListeKonsole()
     {
@@ -54,6 +58,7 @@ public class HistorischeDatenListe
      * @param datum das Datum des Tages
      * @return die Informationen an diesem Tag
      * @throws DatumFehler the io exception bei einem fehler mit dem Datum
+     * @pre Datum nicht in der Zukunft nicht älter als ein Jahr und nicht am Wochenende bzw. Feiertag.
      */
     public TagesInfo getTagesInformationen(String datum) throws DatumFehler, TagesInformationenNichtVorhanden
     {
@@ -69,6 +74,14 @@ public class HistorischeDatenListe
                datum);
     }
 
+    /**
+     * Rückgabe Durchschnittspreis an einem gesuchten Tag
+     * @param datum der gesuchte Tag
+     * @return Durchschnnittspreis
+     * @throws DatumFehler Exception bei einem Fehler mit dem Datum
+     * @throws TagesInformationenNichtVorhanden Exception wenn die Tagesinformationen nicht vorhanden sind.
+     * @pre Datum nicht in der Zukunft nicht älter als ein Jahr und nicht am Wochenende bzw. Feiertag.
+     */
     public double getPreis(String datum) throws DatumFehler, TagesInformationenNichtVorhanden
     {
         TagesInfo ti = this.getTagesInformationen(datum);
@@ -114,6 +127,7 @@ public class HistorischeDatenListe
         return this.name;
     }
 
+    // TODO: 08.08.20 Aktuellen wert des Depots
     public double getLetztenDurchschnittspreis()
     {
         return historischeDatenListe.get(historischeDatenListe.size() - 1).durchschnittsTagesPreis();

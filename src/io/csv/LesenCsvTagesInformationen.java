@@ -1,7 +1,3 @@
-/**
- * Die Klasse Lesen CSV dient dazu eine CSV Datei einzulesen.
- * Die Informationen werden in der ArrayListe HistorischeDatenListe gespeichert.
- */
 package io.csv;
 import error.FehlerCSVInhalt;
 import model.TagesInfo;
@@ -10,10 +6,25 @@ import java.io.*;
 import java.util.*;
 
 //TODO Beide LesenCSV können auch in eine Klasse
+
+/**
+ * Die Klasse Lesen CSV dient dazu eine CSV Datei einzulesen.
+ * Die Informationen werden in der ArrayListe HistorischeDatenListe gespeichert.
+ */
 public class LesenCsvTagesInformationen
 {
     final public static boolean DEBUG = false;
 
+    /**
+     * Die CSV Datei wird eingelesen und aus einer Zeile wird ein Objekt der Klasse TagesInfo  erstellt.
+     * Die Methode liefert eine ArrayList aus Tagesinformationen zurück.
+     * @pre Die CSV Datei ist in der richtigen Formatierung im Ordner database vorhanden.
+     * @post Alle wichtigen Informationen der CSV Datei werden als ArrayListe dem Aufrufer übergeben.
+     * @param file Die CSV Datei
+     * @return ArrayList aus Tagesinformationen
+     * @throws IOException     the io exception
+     * @throws FehlerCSVInhalt the fehler csv inhalt
+     */
     public static ArrayList<TagesInfo> lesenCSV(File file) throws IOException, FehlerCSVInhalt
     {
         ArrayList<TagesInfo> tagesInfoListe = new ArrayList<>();
@@ -38,6 +49,13 @@ public class LesenCsvTagesInformationen
     }
 
 
+    /**
+     * Die Informationen einer Zeile aus der CSV Datei werden in Objekte der Klasse TagesInfo gespeichert.
+     * @inv Die Informationen sind in der richtigen Reinfolge.
+     * @param zeile eine Zeile der CSV Datei
+     * @return ein Objekt der Klasse TagesInfo
+     * @throws FehlerCSVInhalt Exception wenn es einen Inhaltlichen fehler in der CSV datei gibt.
+     */
     private static TagesInfo speicherInhaltZeileInTagesinfo(String zeile) throws FehlerCSVInhalt
     {
         String[] getrennteZeile = zeile.split(",");

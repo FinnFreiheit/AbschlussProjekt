@@ -11,27 +11,16 @@ import java.util.Arrays;
 import java.util.List;
 
 // TODO: 31.07.20 Interface CSVSchreibbar einbinden
+
+/**
+ * Die CSV Datei Kaufhistorie kann kann mit käufen und verkäufen erweitert werde.
+ */
 public class SchreibenCsv
 {
-    static String ersteZeile = "Datum,open,high,low,close";
-    public static void schreibeCSV(HistorischeDatenListe historischeDatenListe, File file)
-    {
-        try(BufferedWriter writer = new BufferedWriter(new FileWriter(file)))
-        {
-            writer.write(ersteZeile);
-            writer.newLine();
-            for (TagesInfo tagesinfo : historischeDatenListe.historischeDatenListe)
-            {
-                writer.write(tagesinfo.toCSV());
-                writer.newLine();
-            }
-        }
-        catch (IOException e)
-        {
-            System.out.println(e.getMessage());
-        }
-    }
-
+    /**
+     * Zur CSV Datei Kaufhistorie werden weitere Transaktionen hinzugefügt.
+     * @param data die Transaktionen, die in die CSV Datei geschrieben werden sollen.
+     */
     private static void appendToKaufHistorie(List<String> data)
     {
         String fileName = "database/KaufHistorie.csv";
@@ -47,12 +36,26 @@ public class SchreibenCsv
         }
     }
 
+    /**
+     * eine Aktie wird mit dem Transaktionsschlüssel "k" für kaufen in die Liste Data gespeichert.
+     *
+     * @param datum  Kaufdatum
+     * @param aktie  Die Aktie die gekauft wurde
+     * @param anzahl Die Anzahl der gekauften Aktien
+     */
     public static void schreibeKaufen(String datum, String aktie, String anzahl)
     {
         List<String> data = Arrays.asList(datum, aktie, anzahl, "k");
         appendToKaufHistorie(data);
     }
 
+    /**
+     * eine Aktie wird mit dem Transaktionsschlüssel "v" für verkaufen in die Liste Data gespeichert.
+     *
+     * @param datum  Verkaufdatum
+     * @param aktie  Die Aktie die verkauft wurde
+     * @param anzahl Die Anzahl der verkauften Aktien
+     */
     public static void schreibeVerkaufen(String datum, String aktie, String anzahl)
     {
         List<String> data = Arrays.asList(datum, aktie, anzahl, "v");
