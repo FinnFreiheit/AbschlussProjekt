@@ -1,6 +1,11 @@
 package model;
 
+import error.FehlerCSVInhalt;
+
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Set;
 
 /**
  * Die Klasse Database, beinhaltet alle historische Datenlisten.
@@ -9,13 +14,43 @@ public class Database
 {
     //Objekt Variablen
     private ArrayList<HistorischeDatenListe> datenBasis;
-
+    final static String PATH = "database/";
     /**
      * Konstruktor
      */
-    public Database()
+    private Database()
     {
         datenBasis = new ArrayList<>();
+    }
+
+    /**
+     * Fabrikmethode zur Erzeugung der Database aller
+     * Aktien aus dem Dax
+     */
+    public static Database generateDatabase()
+    {
+        System.out.println("    Erstelle Database ...");
+        Database db = new Database();
+        Set<String> dax = Dax.getDax().keySet(); // alle Aktienkuerzel aus dem Dax
+        for(String key : dax)
+        {
+            File file = new File(PATH + key + ".csv");
+            try {
+                HistorischeDatenListe hdl = new HistorischeDatenListe(file);
+                db.addData(hdl);
+                System.out.printf("        HistorischeDatenListe von %-7s zur Database hinzugefuegt.%n", key);
+            }
+            catch (IOException e)
+            {
+                e.printStackTrace();
+            }
+            catch (FehlerCSVInhalt fehlerCSVInhalt)
+            {
+                fehlerCSVInhalt.printStackTrace();
+            }
+        }
+        System.out.println("    ... Database erstellt.");
+        return db;
     }
 
     /**
@@ -27,7 +62,6 @@ public class Database
     {
         this.datenBasis.add(data);
     }
-
 
     /**
      * liefert die historische Datenliste mit dem gesuchten Namen.

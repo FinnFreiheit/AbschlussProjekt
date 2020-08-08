@@ -8,6 +8,7 @@ import io.csv.LesenCsvTagesInformationen;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Eine historische Datenliste, beinhalten den Inhalt einer CSV Datei, von einer Aktie, einer Firma,
@@ -19,7 +20,7 @@ public class HistorischeDatenListe
 
     //Objekt Variablen
     // TODO: 01.08.20 private -> problem bei Schreiben CSV
-    public ArrayList<TagesInfo> historischeDatenListe = new ArrayList<>();
+    public List<TagesInfo> historischeDatenListe;
     private String name;
 
 
@@ -31,6 +32,7 @@ public class HistorischeDatenListe
      */
     public HistorischeDatenListe(File file) throws IOException, FehlerCSVInhalt
     {
+        this.historischeDatenListe = new ArrayList<>();
         this.historischeDatenListe = LesenCsvTagesInformationen.lesenCSV(file);
         this.name = getNameAusFile(file);
     }
@@ -65,6 +67,12 @@ public class HistorischeDatenListe
         }
         throw new TagesInformationenNichtVorhanden("Es existieren keine Tagesinformationen zu dem Datum " +
                datum);
+    }
+
+    public double getPreis(String datum) throws DatumFehler, TagesInformationenNichtVorhanden
+    {
+        TagesInfo ti = this.getTagesInformationen(datum);
+        return ti.durchschnittsTagesPreis();
     }
 
     /**

@@ -12,8 +12,7 @@ import java.util.*;
 //TODO Beide LesenCSV können auch in eine Klasse
 public class LesenCsvTagesInformationen
 {
-
-    static File file = new File("/database/DAI.DE.csv");
+    final public static boolean DEBUG = false;
 
     public static ArrayList<TagesInfo> lesenCSV(File file) throws IOException, FehlerCSVInhalt
     {
@@ -23,20 +22,16 @@ public class LesenCsvTagesInformationen
             String zeile;
             //Erste zeile von CSV Datei wird nicht benoetigt.
             reader.readLine();
-            boolean speicherFehler = false;
             while((zeile = reader.readLine()) != null)
             {
-                speicherFehler = true;
                 try {
                     TagesInfo ti = speicherInhaltZeileInTagesinfo(zeile);
-                    speicherFehler = false;
+                    tagesInfoListe.add(ti);
                 }
                 catch(FehlerCSVInhalt e)
                 {
-                    System.err.println(e.getMessage());
+                    if(DEBUG) System.err.println(e.getMessage());
                 }
-                if(!speicherFehler) tagesInfoListe.add(speicherInhaltZeileInTagesinfo(zeile));
-
             }
         }
         return tagesInfoListe;
@@ -60,7 +55,7 @@ public class LesenCsvTagesInformationen
         double high = Double.parseDouble(getrennteZeile[2]);
         double low = Double.parseDouble(getrennteZeile[3]);
         double close = Double.parseDouble(getrennteZeile[4]);
-        double volume = Double.parseDouble(getrennteZeile[5]);
+        double volume = Double.parseDouble(getrennteZeile[6]);
 
         return new TagesInfo(datum,open,close,high,low,volume);
 

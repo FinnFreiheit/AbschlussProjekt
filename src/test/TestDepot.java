@@ -43,13 +43,13 @@ class TestDepot
         assertEquals(meinDepot.getAnzahlAktien(),20);
 
         //Verkaufen
-        meinDepot.verkaufen(daimler.getTagesInformationen("2019-08-08").durchschnittsTagesPreis(),
+        meinDepot.verkaufen("2019-08-08", daimler.getTagesInformationen("2019-08-08").durchschnittsTagesPreis(),
                 10,daimler.getName());
         assertEquals(meinDepot.getAnzahlAktien(),10);
 
         try
         {
-            meinDepot.verkaufen(20,10,"SIE.DE");
+            meinDepot.verkaufen("2019-08-08", 20,10,"SIE.DE");
         }
         catch (AktieNichtVorhanden e)
         {

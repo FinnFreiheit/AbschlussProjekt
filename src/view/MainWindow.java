@@ -1,5 +1,7 @@
 package view;
 
+import model.Depot;
+
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,32 +12,32 @@ public class MainWindow extends JFrame
 {
 	String message = "Wählen Sie eine Option:";
 	
-	public MainWindow()
+	public MainWindow(Depot depot)
 	{
 		super("Dax");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.getContentPane().add(createMessagePanel(), BorderLayout.NORTH);
-		this.getContentPane().add(createTabPanel(), BorderLayout.CENTER);
+		this.getContentPane().add(createTabPanel(depot), BorderLayout.CENTER);
 		this.getContentPane().add(createEndePanel(), BorderLayout.SOUTH);
 		this.setSize(800, 600);
 		this.setVisible(true);
 	}
 	
-	public JTabbedPane createTabPanel()
+	public JTabbedPane createTabPanel(Depot depot)
 	{
 		JTabbedPane tabbedPane = new JTabbedPane();
 
-		JPanel tab1 = new LoadCSVGui();
+		//JPanel tab1 = new LoadCSVGui();
 
-		JPanel tab2 = new KaufenGui();
+		JPanel tab2 = new KaufenGui(depot);
 
-		JPanel tab3 = new ConsoleGui();
+		//JPanel tab3 = new ConsoleGui();
 
 		JPanel tab4 = new StatistikGui();
 
-		tabbedPane.addTab("Aktieninfos laden", tab1);
+		//tabbedPane.addTab("Aktieninfos laden", tab1);
 		tabbedPane.addTab("Aktien kaufen/verkaufen", tab2);
-		tabbedPane.addTab("Depot Ausgabe", tab3);
+		//tabbedPane.addTab("Depot Ausgabe", tab3);
 		tabbedPane.addTab("Statistik", tab4);
 
 		return tabbedPane;

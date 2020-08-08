@@ -3,6 +3,7 @@ package model;
 import error.AktieNichtVorhanden;
 import error.DatumFehler;
 import error.TagesInformationenNichtVorhanden;
+import io.csv.SchreibenCsv;
 
 import java.util.ArrayList;
 
@@ -21,11 +22,10 @@ public class Depot
      */
     public Depot()
     {
-        depot = new ArrayList<>();
+        this.depot = new ArrayList<>();
         this.investition = 0;
 
     }
-
 
     /**
      * Loeschen.
@@ -36,19 +36,19 @@ public class Depot
      * @throws AktieNichtVorhanden Exception wenn die Aktie die Verkauft werden soll nicht
      * vorhanden ist.
      */
-    public void verkaufen(double preis, int anz, String name) throws AktieNichtVorhanden
+    public void verkaufen(String datum, double preis, int anz, String name) throws AktieNichtVorhanden
     {
         if(aktieIstNichtVorhanden(name))
         {
-            throw new AktieNichtVorhanden("Die Aktie die Verkauft werden soll ist nicht Vorhanden");
+            throw new AktieNichtVorhanden("Die Aktie, die verkauft werden soll, ist nicht vorhanden");
         }
         else
         {
-          getAktie(name).setPreis(preis,-anz);
-          getAktie(name).setAnzahl(getAktie(name).getAnzahl() - anz);
+          this.getAktie(name).setPreis(preis,-anz);
+          this.getAktie(name).setAnzahl(getAktie(name).getAnzahl() - anz);
         }
-
-        investitionsBetragDepot();
+        SchreibenCsv.schreibeKaufen(datum, name, String.valueOf(anz));
+        this.investitionsBetragDepot();
     }
 
     /**
@@ -73,11 +73,11 @@ public class Depot
         //wenn die Aktie schon im Depot vorhanden ist, wird die Anzahl und der Durchschnittspreis angepasst
         else
         {
-            getAktie(hdl.getName()).setPreis(hdl.getTagesInformationen(datum).durchschnittsTagesPreis(), anz);
-            getAktie(hdl.getName()).setAnzahl(getAktie(hdl.getName()).getAnzahl() + anz);
+            this.getAktie(hdl.getName()).setPreis(hdl.getTagesInformationen(datum).durchschnittsTagesPreis(), anz);
+            this.getAktie(hdl.getName()).setAnzahl(getAktie(hdl.getName()).getAnzahl() + anz);
         }
-
-        investitionsBetragDepot();
+        SchreibenCsv.schreibeKaufen(datum, hdl.getName(), String.valueOf(anz));
+        this.investitionsBetragDepot();
     }
 
 

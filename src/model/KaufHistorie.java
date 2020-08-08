@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public class KaufHistorie
 {
     //Objektvariablen
-    public ArrayList<Transaktion> kaufHistorie = new ArrayList<>();
+    public ArrayList<Transaktion> kaufHistorie;
 
     /**
      * Konstruktor
@@ -69,7 +69,7 @@ public class KaufHistorie
             }
             else
             {
-                depot.verkaufen(historischeDatenListe.getTagesInformationen(t.datum).durchschnittsTagesPreis(),
+                depot.verkaufen(t.datum, historischeDatenListe.getTagesInformationen(t.datum).durchschnittsTagesPreis(),
                                 t.anzahl, historischeDatenListe.getName());
 
                 System.out.println("Die Aktie " + t.aktienName + " wurde für " + String.format("%.2f",

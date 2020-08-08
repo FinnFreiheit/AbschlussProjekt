@@ -4,6 +4,7 @@ import error.AktieNichtVorhanden;
 import error.DatumFehler;
 import error.FehlerCSVInhalt;
 import error.TagesInformationenNichtVorhanden;
+import helper.GenerateCSV;
 import model.Database;
 import model.Depot;
 import model.HistorischeDatenListe;
@@ -17,36 +18,31 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 // TODO: 05.08.20 Format ausgabe auf zwei Nachkommastellen
 public class Main
 {
-    static File daimlerFile = new File("database/DAI.DE.csv");
-    static File siemensFile = new File("database/SIE.DE.csv");
-    static File infineonFile = new File("database/IFX.DE.csv");
     static File kaufHistorieFile = new File("database/KaufHistorie.csv");
-    static File schreibeFile = new File("./test/DaimlerTestSChreiben.csv");
 
     //__________________________________________________________________________________________________________________
     //Main Methode
     public static void main(String[] args)
             throws IOException, DatumFehler, AktieNichtVorhanden, TagesInformationenNichtVorhanden, FehlerCSVInhalt
     {
-        // GUI starten
-        javax.swing.SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                new view.MainWindow();
-            }
-        });
+        System.out.printf("%n%n------ 1. alle csv-Dateien laden ------%n%n");
+        // GenerateCSV.loadCSV();
 
-        HistorischeDatenListe daimler = new HistorischeDatenListe(daimlerFile);
-        HistorischeDatenListe siemens = new HistorischeDatenListe(siemensFile);
-        HistorischeDatenListe infineon = new HistorischeDatenListe(infineonFile);
+        System.out.printf("%n%n------ 2. Datenbasis erstellen --------%n%n");
+        Database datenbasis = Database.generateDatabase();
 
-        Database datenbasis = new Database();
-        datenbasis.addData(daimler);
-        datenbasis.addData(siemens);
-        datenbasis.addData(infineon);
-
+        System.out.printf("%n%n------ 3. Kaufhistorie einlesen -------%n%n");
         KaufHistorie kaufHistorie = new KaufHistorie(kaufHistorieFile);
 
+        System.out.printf("%n%n------ 4. Depot erstellen -------------%n%n");
         Depot meinDepot = kaufHistorie.depotErstellen(datenbasis);
+
+        System.out.printf("%n%n------ 5. GUI starten -----------------%n%n");
+        javax.swing.SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                new view.MainWindow(meinDepot);
+            }
+        });
 
         System.out.println("______________________________");
         //meinDepot.ausgabeDepot();
@@ -72,9 +68,9 @@ public class Main
         meinDepot.hinzufuegen("2019-08-07",1,daimler);
         meinDepot.loeschen("2019-08-06", 15,"DAI.DE");
         meinDepot.ausgabeDepot();
-        */
+        *//*
 
-
+*/
     }
 
 

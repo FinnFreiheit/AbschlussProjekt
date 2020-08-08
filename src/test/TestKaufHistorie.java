@@ -20,15 +20,15 @@ import static org.junit.jupiter.api.Assertions.*;
 class TestKaufHistorie
 {
     KaufHistorie testKaufHistorie;
-    Database data = new Database();
-    Database dummyData = new Database();
+    Database data = Database.generateDatabase();
+    //Database dummyData = new Database();
     HistorischeDatenListe daimler;
 
     @BeforeEach
     void setUp() throws IOException, FehlerCSVInhalt
     {
-        testKaufHistorie = new KaufHistorie(new File("/Users/Finn/IdeaProjects/Aktien/src/test/KaufHistorie.csv"));
-        daimler = new HistorischeDatenListe(new File("/Users/Finn/IdeaProjects/Aktien/src/test/DAI.DE.csv"));
+        testKaufHistorie = new KaufHistorie(new File("./src/test/KaufHistorie.csv"));
+        daimler = new HistorischeDatenListe(new File("./src/test/DAI.DE.csv"));
         data.addData(daimler);
 
     }
