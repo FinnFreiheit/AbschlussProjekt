@@ -28,11 +28,6 @@ class TestDepot
         meinDepot = new Depot();
     }
 
-    @AfterEach
-    void tearDown()
-    {
-    }
-
     @Test
     void kaufen_verkaufen() throws DatumFehler, TagesInformationenNichtVorhanden, AktieNichtVorhanden
     {
@@ -56,17 +51,7 @@ class TestDepot
             System.out.println(e.getMessage());
         }
     }
-
-
-
-    @Test
-    void wertDepot() throws DatumFehler, TagesInformationenNichtVorhanden, AktieNichtVorhanden
-    {
-        meinDepot.kaufen("2019-08-06",10,daimler);
-       // assertEquals(437.6,meinDepot.wertDepot());
-
-    }
-
+    
     @Test
     void ausgabeDepot() throws DatumFehler, TagesInformationenNichtVorhanden, AktieNichtVorhanden
     {

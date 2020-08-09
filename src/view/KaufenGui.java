@@ -17,15 +17,41 @@ import javax.swing.border.TitledBorder;
 import model.Dax;
 import model.Depot;
 
+/**
+ * Java swing Fenster Kaufen. In dem Fenster können transaktionen getätigt werden, die einfluss auf das Depot haben.
+ */
 public class KaufenGui extends JPanel
 {
+	/**
+	 * Aktie kaufen input.
+	 */
 	JComboBox<String> aktieKaufenInput;
+	/**
+	 * Datum kaufen input.
+	 */
 	JComboBox<String> datumKaufenInput;
+	/**
+	 * Anzahl kaufen input.
+	 */
 	JComboBox<String> anzahlKaufenInput;
+	/**
+	 * Aktie verkaufen input.
+	 */
 	JComboBox<String> aktieVerkaufenInput;
+	/**
+	 * Datum verkaufen input.
+	 */
 	JComboBox<String> datumVerkaufenInput;
+	/**
+	 * Anzahl verkaufen input.
+	 */
 	JComboBox<String> anzahlVerkaufenInput;
 
+	/**
+	 * Konstruktor
+	 *
+	 * @param depot the depot
+	 */
 	public KaufenGui(Depot depot)
 	{
 		super();
@@ -34,6 +60,12 @@ public class KaufenGui extends JPanel
 		this.add(createBothPanels(depot), BorderLayout.CENTER);
 	}
 
+	/**
+	 * erzeugt beide panels. Links kaufen, rechts verkaufen
+	 *
+	 * @param depot the depot
+	 * @return the j panel
+	 */
 	JPanel createBothPanels(Depot depot)
 	{
 		JPanel both = new JPanel();

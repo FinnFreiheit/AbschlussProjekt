@@ -28,22 +28,69 @@ import javax.swing.text.JTextComponent;
 
 import model.Dax;
 
+/**
+ * Java Swing Fenster, in der man die historischen Datenlisten einer Firma aus dem DAX einsehen kann, oder die
+ * Tagesinformationen aller Firmen zu einem bestimmten Datum. Die DAX Firma kann über ein Dropdown Menü ausgewählt
+ * werden.
+ */
 public class StatistikGui extends JPanel
 {
+	/**
+	 * Titles.
+	 */
 	String[] titles;
+	/**
+	 * Data.
+	 */
 	String[][] data;
+	/**
+	 * Key / Aktien Kürzel.
+	 */
 	String key = "SIE.DE";
+	/**
+	 * Datum.
+	 */
 	String date;
+	/**
+	 * Message.
+	 */
 	String message = "Sie haben eine Aktie ausgewählt! Aktuell: " + this.key;
+	/**
+	 * Message label.
+	 */
 	JLabel messageLabel;
+	/**
+	 * Date list.
+	 */
 	JComboBox<String> dateList;
+	/**
+	 * ausgewählte Aktie.
+	 */
 	JComboBox<String> selectAktie;
-	JRadioButton aktie; 
+	/**
+	 * Aktie.
+	 */
+	JRadioButton aktie;
+	/**
+	 * Datum.
+	 */
 	JRadioButton datum;
+	/**
+	 * Tabelle.
+	 */
 	JTable table;
+	/**
+	 * Tabelle panel.
+	 */
 	JPanel tablePanel;
+	/**
+	 * Model.
+	 */
 	MyTableModel model;
-	
+
+	/**
+	 * Konstruktor
+	 */
 	public StatistikGui()
 	{
 		super();
@@ -59,6 +106,12 @@ public class StatistikGui extends JPanel
 		DateTimeFormatter myFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		this.date = today.format(myFormat);
 	}
+
+	/**
+	 * erzeugt ein Auswahlpanel.
+	 *
+	 * @return the j panel
+	 */
 	public JPanel createSelectionPanel()
 	{
 		JPanel panel = new JPanel(new BorderLayout());
@@ -134,7 +187,14 @@ public class StatistikGui extends JPanel
 		panel.add(right, BorderLayout.EAST);
 		return panel;
 	}
-	
+
+	/**
+	 * Erzeuge scroll Tabelle um die historischen Datenlisten und Tagesinformationen auszugeben.
+	 *
+	 * @param data   the data
+	 * @param titles the titles
+	 * @return the j panel
+	 */
 	public JPanel createTable(String[][] data, String[] titles)
 	{
 		this.tablePanel = new JPanel();
@@ -146,8 +206,14 @@ public class StatistikGui extends JPanel
 		this.tablePanel.add(scrollPane);
 		return this.tablePanel;
 	}
-	
-	// alle Daten aus einer Datei - key ist Aktienkuerzel
+
+	/**
+	 * Get data key string [ ] [ ].
+	 *
+	 * @param key the key
+	 * @return the string [ ] [ ]
+	 */
+// alle Daten aus einer Datei - key ist Aktienkuerzel
 	public String[][] getDataKey(String key)
 	{
 		String fileName = "./database/" + key + ".csv";
@@ -167,8 +233,14 @@ public class StatistikGui extends JPanel
 		String[][] data = listToArray(records);
 		return data;
 	}
-	
-	// Daten aus allen Dateien (jeweils Zeile des Datums) - date ist Datum
+
+	/**
+	 * Get data date string [ ] [ ].
+	 *
+	 * @param date the date
+	 * @return the string [ ] [ ]
+	 */
+// Daten aus allen Dateien (jeweils Zeile des Datums) - date ist Datum
 	public String[][] getDataDate(String date)
 	{
 		Map<String, String> dax = Dax.getDax(); // alle Aktien (Kuerzel + Name)
@@ -198,7 +270,13 @@ public class StatistikGui extends JPanel
 		String[][] data = listToArray(records);
 		return data;
 	}
-	
+
+	/**
+	 * Get titles key string [ ].
+	 *
+	 * @param key the key
+	 * @return the string [ ]
+	 */
 	public String[] getTitlesKey(String key)
 	{
 		String fileName = "database/" + key + ".csv";
@@ -212,7 +290,12 @@ public class StatistikGui extends JPanel
 		}
 		return this.titles;
 	}
-	
+
+	/**
+	 * Get titles date string [ ].
+	 *
+	 * @return the string [ ]
+	 */
 	public String[] getTitlesDate()
 	{
 		String[] titles = getTitlesKey(this.key);
@@ -228,19 +311,34 @@ public class StatistikGui extends JPanel
 	            .toArray(String[][]::new);
 		return data;
 	}
-	
+
+	/**
+	 * The type My table model.
+	 */
 	class MyTableModel extends AbstractTableModel
 	{
 	    private String[][] data;
 	    private String[] titles;
-	    
-	    public MyTableModel(String[][] data, String[] titles) 
+
+		/**
+		 * Instantiates a new My table model.
+		 *
+		 * @param data   the data
+		 * @param titles the titles
+		 */
+		public MyTableModel(String[][] data, String[] titles)
 	    {
 	        this.data = data;
 	        this.titles = titles;
 	    }
-	    
-	    public void update(String[][] data, String[] titles)
+
+		/**
+		 * Update.
+		 *
+		 * @param data   the data
+		 * @param titles the titles
+		 */
+		public void update(String[][] data, String[] titles)
 	    {
 	    	this.data = data;
 	        this.titles = titles;

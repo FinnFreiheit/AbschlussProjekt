@@ -8,10 +8,21 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
+/**
+ * Java Swing Hauptfenster
+ */
 public class MainWindow extends JFrame
 {
+	/**
+	 * nachricht
+	 */
 	String message = "Wählen Sie eine Option:";
-	
+
+	/**
+	 * Konstruktor
+	 *
+	 * @param depot the depot
+	 */
 	public MainWindow(Depot depot)
 	{
 		super("Dax");
@@ -22,7 +33,13 @@ public class MainWindow extends JFrame
 		this.setSize(800, 600);
 		this.setVisible(true);
 	}
-	
+
+	/**
+	 * Create tab panel j tabbed pane.
+	 *
+	 * @param depot Das Depot
+	 * @return the j tabbed pane
+	 */
 	public JTabbedPane createTabPanel(Depot depot)
 	{
 		JTabbedPane tabbedPane = new JTabbedPane();
@@ -42,7 +59,12 @@ public class MainWindow extends JFrame
 
 		return tabbedPane;
 	}
-	
+
+	/**
+	 * Create message panel j panel.
+	 *
+	 * @return the j panel
+	 */
 	public JPanel createMessagePanel()
 	{
 		JPanel messagePanel = new JPanel();
@@ -50,8 +72,13 @@ public class MainWindow extends JFrame
 		messagePanel.add(messageLabel);
 		return messagePanel;
 	}
-	
-	
+
+
+	/**
+	 * Create ende panel j panel.
+	 *
+	 * @return the j panel
+	 */
 	public JPanel createEndePanel()
 	{
 		JPanel endePanel = new JPanel();		
