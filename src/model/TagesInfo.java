@@ -8,7 +8,6 @@ import java.util.Locale;
 public class TagesInfo implements CSVSchreibbar
 {
 
-    // TODO: 01.08.20 Volumen
     //Obejkt Variablen
     private String datum;
     private double startWert;
@@ -50,7 +49,7 @@ public class TagesInfo implements CSVSchreibbar
     }
 
     /**
-     * Get Datum.
+     * Gibt das Datum zurück.
      *
      * @return Datum
      */
@@ -60,7 +59,7 @@ public class TagesInfo implements CSVSchreibbar
     }
 
     /**
-     * Der Kaufpreis
+     * Ermittelt den Kaufpreis als mittelwert zwischen Tageshoch und Tagestief
      *
      * @return Kaufpreis double
      */
@@ -70,19 +69,33 @@ public class TagesInfo implements CSVSchreibbar
     }
 
 
+    /**
+     * Fügt Datum, Startwert, Schlusswert, Tageshoch und Tagestief  in ein String zusammen
+     * @return String mit denn Objektvariablen
+     */
     @Override
     public String toString()
     {
         return String.format(Locale.US,"%s %f %f %f %f",datum,startWert,schlussWert,tagesHoch,tagesTief);
     }
 
+    /**
+     * Fügt Datum, Startwert, Schlusswert, Tageshoch und Tagestief  in ein String zusammen. Die einzelenen Werte werden
+     * durch ein Komma getrennt, damit man aus dem String eine CSV Datei schreiben kann
+     * @return String mit denn Objektvariablen
+     */
     @Override
     public String toCSV()
     {
         return String.format(Locale.US,"%s,%f,%f,%f,%f",datum,startWert,schlussWert,tagesHoch,tagesTief);
     }
 
-    // TODO: 03.08.20 HashCode
+
+    /**
+     * Vergleicht zwei Objekte von Tagesinfo miteinander.
+     * @param o Das Objekt welches mit Tagesinformation verglichen werden soll
+     * @return true wenn das Objekt der Tagesinformation entspricht false wenn nicht.
+     */
     @Override
     public boolean equals( Object o )
     {

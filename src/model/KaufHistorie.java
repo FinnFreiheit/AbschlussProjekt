@@ -17,10 +17,7 @@ import java.util.ArrayList;
  */
 public class KaufHistorie
 {
-    /**
-     * The Kauf historie.
-     */
-//Objektvariablen
+    //Objektvariablen
     public ArrayList<Transaktion> kaufHistorie;
 
     /**
@@ -37,12 +34,14 @@ public class KaufHistorie
 
     /**
      * Erstellt ein Objekt der Klasse Depot anhand der Kaufhistorie
+     * Und gibt das Depot nach jeder Transaktion auf die Konsole aus, mit Gewinn und Verlust und dem bis jetzt
+     * investierten Betrag.
      *
      * @param datenbasis die Datenbasis
      * @return das Depot
      * @throws DatumFehler                      the io exception bei einem fehler mit dem Datum
-     * @throws AktieNichtVorhanden              the aktie nicht vorhanden
-     * @throws TagesInformationenNichtVorhanden the tages informationen nicht vorhanden
+     * @throws AktieNichtVorhanden              Exception wenn die Aktie nicht vorhanden ist
+     * @throws TagesInformationenNichtVorhanden Exception wenn die Tagesinformationen nicht vorhanden sind
      */
     public Depot depotErstellen(Database datenbasis)
             throws DatumFehler, AktieNichtVorhanden, TagesInformationenNichtVorhanden
@@ -50,8 +49,7 @@ public class KaufHistorie
         final String RED = "\u001B[31m";
         final String RESET = "\u001B[0m";
         final String GREEN = "\u001B[32m";
-
-        String euro = "\u20ac";
+        final String EURO = "\u20ac";
 
 
         Depot depot = new Depot();
@@ -71,7 +69,7 @@ public class KaufHistorie
                                                                                                historischeDatenListe.getTagesInformationen(
                                                                                                        t.datum)
                                                                                                                     .durchschnittsTagesPreis()) +
-                                           euro + " gekauft");
+                                           EURO + " gekauft");
 
             }
             else
@@ -83,23 +81,23 @@ public class KaufHistorie
                                                                                                historischeDatenListe.getTagesInformationen(
                                                                                                        t.datum)
                                                                                                                     .durchschnittsTagesPreis()) +
-                                           euro + " verkauft");
+                                           EURO + " verkauft");
 
             }
 
 
             depot.ausgabeDepot();
-            System.out.println("Investiert: " + String.format("%.2f",depot.getInvestition()) + euro);
+            System.out.println("Investiert: " + String.format("%.2f",depot.getInvestition()) + EURO);
             if (depot.depotWertZumZeitpunkt(t.datum, datenbasis) >= 0)
             {
                 System.out.println(
                         GREEN + "Gewinn: " + String.format("%.2f",depot.depotWertZumZeitpunkt(t.datum, datenbasis))  +
-                                                                   euro + RESET);
+                                                                   EURO + RESET);
             }
             else
             {
                 System.out.println(RED + "Verlust: " + String.format("%.2f",depot.depotWertZumZeitpunkt(t.datum,
-                                                                                                  datenbasis)) + euro + RESET);
+                                                                                                  datenbasis)) + EURO + RESET);
             }
             System.out.println("___________________________________");
 
