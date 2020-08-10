@@ -27,6 +27,4 @@ public class Transaktion
         //true fuer Kaufen
         this.handelsAktion = handelsAktion.equals("k");
     }
-
-
 }

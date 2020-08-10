@@ -1,11 +1,14 @@
 @startuml
 (*) --> "Laden der CSV Dateien der 30 DAX unternehmen"
 note right : Die CSV Dateien werden unter dem Namen \n "Aktienkürzel.csv" im Ordner database gespeichert.
---> "Erstellen der Database aus allen historischen Kursdaten der 30 Dax Unternehmen"
-note right : Die Klasse Database besteht aus alles historischen Kursdaten \n der 30 Dax Unternehmen.
+--> "Die historischen Kursdaten der 30 DAX unternehmen werden in der ArrayListe database zusammengefasst"
+note left : "Dafür werden alle CSV Dateien aus dem Ordner database vom Programm eingelesen"
+note right : "Über dei Database hat man zugriff auf alle Tagesinformationen des letzten Jahres, \n von allen 30 DAX Unternehmen"
 If "Kaufhistorie liegt vor"
     --> [ja]===s0===
     --> "Erstellen eines Depots anhand der Kaufhistorie"
+    note left : "Die CSV Datei Kaufhistorie sollte vom User\n im Ordner database abgelegt werden.\n Die CSV Datei wird eingelesen"
+    note right : in einem Depot werden die Informationen zu den Aktien gespeichert, die man erworben hat.
     --> ===s1===
     -->"Gewinn / Verlust des Depots wird bestimmt"
     --> ===s2===
@@ -14,6 +17,7 @@ If "Kaufhistorie liegt vor"
     --> "der zeitliche Verlauf des Depots wird auf der Konsole ausgegeben"
     if " Erweitern der Kaufhistorie über die GUI"
         --> [Ja] "CSV Datei Kaufhistorie wird ergänzt "
+        note left : "Der User kann über die GUI Aktien aus dem DAX Kaufen \n und verkaugen. Die Transaktionen werden in der CSV Datei ergänzt."
         --> ===s0===
     Else
     --> [nein](*)
