@@ -102,6 +102,7 @@ public class KaufHistorie
             System.out.println("___________________________________");
 
         }
+
         return depot;
     }
 }

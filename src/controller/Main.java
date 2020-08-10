@@ -5,10 +5,7 @@ import error.DatumFehler;
 import error.FehlerCSVInhalt;
 import error.TagesInformationenNichtVorhanden;
 import helper.GenerateCSV;
-import model.Database;
-import model.Depot;
-import model.HistorischeDatenListe;
-import model.KaufHistorie;
+import model.*;
 
 import java.io.File;
 import java.io.IOException;
