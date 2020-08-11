@@ -29,22 +29,27 @@ import javax.swing.text.JTextComponent;
 import model.Dax;
 
 /**
- * Java Swing Fenster, in der man die historischen Datenlisten einer Firma aus dem DAX einsehen kann, oder die
- * Tagesinformationen aller Firmen zu einem bestimmten Datum. Die DAX Firma kann über ein Dropdown Menü ausgewählt
- * werden.
+ * Java Swing JPanel, in der man die historischen Kursdaten einer Aktie aus dem DAX einsehen kann oder die
+ * Tagesinformationen aller Aktien zu einem bestimmten Datum. Die Aktie kann aus einer Liste (JComboBox)
+ * ausgewaehlt werden. Die Datumseingabe erfolgt ueber eine editierbare JComboBox.
+ * Je nachdem, ob Aktie oder Datum ausgewaehlt wurde, wird eine JTable mit den entsprechenden Informationen
+ * erstellt. Dazu wird die Klasse {@code MyTableModel} verwendet, die von {@code AbstractTableModel} erbt.
+ * {@code AbstractTableModel} enthaelt Methoden zur Erstellung einer JTable. {@code MyTableModel} stellt den
+ * Adapter zwischen der JTable und den eigentlichen Daten (und den Spaltenueberschriften) dar.
+ *
  */
 public class StatistikGui extends JPanel
 {
 	/**
-	 * Titles.
+	 * Die Spaltenueberschriften der Tabelle.
 	 */
 	String[] titles;
 	/**
-	 * Data.
+	 * Die Daten, die in der Tabelle aufgelistet werden.
 	 */
 	String[][] data;
 	/**
-	 * Key / Aktien Kürzel.
+	 * Key / Aktienkuerzel mit einem Anfangswert.
 	 */
 	String key = "SIE.DE";
 	/**
@@ -56,35 +61,28 @@ public class StatistikGui extends JPanel
 	 */
 	String message = "Sie haben eine Aktie ausgewählt! Aktuell: " + this.key;
 	/**
-	 * Message label.
+	 * Message label, zeigt die {@code message} an.
 	 */
 	JLabel messageLabel;
 	/**
-	 * Date list.
+	 * Eingabefeld zur Eingabe des Datums.
 	 */
 	JComboBox<String> dateList;
 	/**
-	 * ausgewählte Aktie.
+	 * Auswahlfeld zur Auswahl einer Aktie.
 	 */
 	JComboBox<String> selectAktie;
 	/**
-	 * Aktie.
-	 */
-	JRadioButton aktie;
-	/**
-	 * Datum.
-	 */
-	JRadioButton datum;
-	/**
-	 * Tabelle.
+	 * Die Tabelle, die die Kursinformationen anzeigt.
 	 */
 	JTable table;
 	/**
-	 * Tabelle panel.
+	 * Das JPanel, das die Tabelle enthaelt.
 	 */
 	JPanel tablePanel;
 	/**
-	 * Model.
+	 * Das Model, das die Verbindung zwischen den Daten und der Tabelle herstellt (abgeleitet
+	 * von {@code AbstractTableModel}).
 	 */
 	MyTableModel model;
 
@@ -95,28 +93,29 @@ public class StatistikGui extends JPanel
 	{
 		super();
 		this.setLayout(new BorderLayout());
-		//String[][] data = this.listToArray(this.fileToArray(this.key));
+
 		this.data = this.getDataKey(this.key);
 		this.titles = this.getTitlesKey(this.key);
 		this.add(createSelectionPanel(), BorderLayout.NORTH);
 		this.add(createTable(this.data, this.titles), BorderLayout.CENTER);
 		
-		// this.date = heute
+		// this.date = heute --> Voreintragung im Datumsfeld
 		LocalDate today = LocalDate.now(); 
 		DateTimeFormatter myFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		this.date = today.format(myFormat);
 	}
 
 	/**
-	 * erzeugt ein Auswahlpanel.
+	 * Erzeugt ein Auswahlpanel mit Nachrichten und mit den beiden Auswahlfeldern fuer
+	 * die Aktie bzw. das Datum.
 	 *
-	 * @return the j panel
+	 * @return das JPanel mit den Auswahlfeldern und den Nachrichten.
 	 */
 	public JPanel createSelectionPanel()
 	{
 		JPanel panel = new JPanel(new BorderLayout());
 		
-		// linkes Panel mit 2 RadioButtons
+		// linkes Panel mit 2 Labels fuer die Informationen an den Nutzer
 		JPanel left = new JPanel(new GridLayout(0,1));
 		JLabel label = new JLabel("Wählen Sie eine Aktie oder wählen Sie ein Datum :");
 		this.messageLabel = new JLabel(message);
@@ -189,11 +188,11 @@ public class StatistikGui extends JPanel
 	}
 
 	/**
-	 * Erzeuge scroll Tabelle um die historischen Datenlisten und Tagesinformationen auszugeben.
+	 * Erzeugt scrollbare Tabelle, um die historischen Datenlisten und Tagesinformationen auszugeben.
 	 *
-	 * @param data   the data
-	 * @param titles the titles
-	 * @return the j panel
+	 * @param data   die Daten, die in der Tabelle angezeigt werden
+	 * @param titles die Spaltenueberschriften in der Tabelle
+	 * @return das JPanel, das die Tabelle enthaelt
 	 */
 	public JPanel createTable(String[][] data, String[] titles)
 	{
@@ -208,14 +207,15 @@ public class StatistikGui extends JPanel
 	}
 
 	/**
-	 * Get data key string [ ] [ ].
+	 * diese Methode liest alle Daten aus der Datei <Aktienkuerzel>.de aus und speichert
+	 * sie in einem zweidimensionalen Array (zeilen x spalten). Das Array wird zurueckgegeben.
 	 *
-	 * @param key the key
-	 * @return the string [ ] [ ]
+	 * @param key - das Aktienkuerzel
+	 * @return die Kursdaten der Aktie als String[][]
 	 */
-// alle Daten aus einer Datei - key ist Aktienkuerzel
 	public String[][] getDataKey(String key)
 	{
+		// alle Daten aus einer Datei - key ist Aktienkuerzel
 		String fileName = "./database/" + key + ".csv";
 		List<List<String>> records = new ArrayList<List<String>>();
 		try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
@@ -235,14 +235,16 @@ public class StatistikGui extends JPanel
 	}
 
 	/**
-	 * Get data date string [ ] [ ].
+	 * diese Methode liest die Daten aus allen Dateien <Aktienkuerzel>.de zu dem bestimmten
+	 * Datum {@code date} aus und speichert sie in einem zweidimensionalen Array
+	 * (Aktien x spalten). Das Array wird zurueckgegeben.
 	 *
-	 * @param date the date
-	 * @return the string [ ] [ ]
+	 * @param date - das Datum
+	 * @return die Kursdaten aller Aktien zum Datum {@code date} als String[][]
 	 */
-// Daten aus allen Dateien (jeweils Zeile des Datums) - date ist Datum
 	public String[][] getDataDate(String date)
 	{
+		// Daten aus allen Dateien (jeweils Zeile des Datums) - date ist Datum
 		Map<String, String> dax = Dax.getDax(); // alle Aktien (Kuerzel + Name)
 		Set<String> keys = dax.keySet();		// alle Kuerzel
 
@@ -272,10 +274,12 @@ public class StatistikGui extends JPanel
 	}
 
 	/**
-	 * Get titles key string [ ].
+	 * Diese Methode liest die Spaltenueberschriften aus der Datei <Aktienkuerzel>.de
+	 * aus. Es handelt sich um die jeweils erste Zeile in der CSV-Datei. Die Spalten-
+	 * ueberschriften werden als String-Array zurueckgegeben.
 	 *
-	 * @param key the key
-	 * @return the string [ ]
+	 * @param key - das Aktienkuerzel
+	 * @return die Spaltenueberschriften als String[]
 	 */
 	public String[] getTitlesKey(String key)
 	{
@@ -292,9 +296,13 @@ public class StatistikGui extends JPanel
 	}
 
 	/**
-	 * Get titles date string [ ].
+	 * Diese Methode liest die Spaltenueberschriften aus der Datei <Aktienkuerzel>.de
+	 * aus und aendert die erste Spaltenueberschrift von {@code Date} nach {@code Share}.
+	 * Es handelt sich um die jeweils erste Zeile in der CSV-Datei, die dann fuer den
+	 * ersten Eintrag angepasst wird. Die Spaltenueberschriften werden als String-Array
+	 * zurueckgegeben.
 	 *
-	 * @return the string [ ]
+	 * @return die Spaltenueberschriften als String[]
 	 */
 	public String[] getTitlesDate()
 	{
@@ -303,7 +311,14 @@ public class StatistikGui extends JPanel
 		this.titles = titles;
 		return this.titles;
 	}
-	
+
+	/**
+	 * Hilfsmethode, um aus einer {@code List<List<String>>} ein {@code String[][]} zu
+	 * erzeugen.
+	 *
+	 * @param records - die Daten im Format {@code List<List<String>>}
+	 * @return die Daten im Format {@code String[][]}
+	 */
 	private String[][] listToArray(List<List<String>> records)
 	{
 		String[][] data = records.stream()
@@ -313,7 +328,14 @@ public class StatistikGui extends JPanel
 	}
 
 	/**
-	 * The type My table model.
+	 * Diese Klasse stellt den Adapter (die Verbindung) zwischen den Daten und den Ueberschriften
+	 * und der Tabelle dar. Die Klasse {@code MyTableModel} erbt von {@code AbstractTableModel},
+	 * welche das Interface {@code TableModel} implementiert. Die Methoden des Interfaces helfen
+	 * einer JTable sich zu erstellen, indem Informationen über die Anzahl der Spalten, Anzahl der
+	 * Zeilen, Spaltenueberschriften usw. auf Basis der uebergebenen Daten ({@code data}) und
+	 * Spaltenueberschriften ({@code titles}) erzeugt werden.
+	 * Ein Objekt von {@code MyTableModel} mit konkreten Daten ({@code data}) und konkreten
+	 * Spaltenueberschriften ({@code titles}) wird der zu erstellenden {@code JTable} uebergeben.
 	 */
 	class MyTableModel extends AbstractTableModel
 	{
@@ -321,10 +343,11 @@ public class StatistikGui extends JPanel
 	    private String[] titles;
 
 		/**
-		 * Instantiates a new My table model.
+		 * Konstruktor zur Erzeugung eines Objektes von {@code MyTableModel}. Die konkreten Daten
+		 *  ({@code data}) und konkreten Spaltenueberschriften ({@code titles}) werden iniziiert.
 		 *
-		 * @param data   the data
-		 * @param titles the titles
+		 * @param data   - die Dateneintraege in die zu erstellende Tabelle
+		 * @param titles - die Spaltenueberschriften der zu erstellenden Tabelle
 		 */
 		public MyTableModel(String[][] data, String[] titles)
 	    {
@@ -333,10 +356,14 @@ public class StatistikGui extends JPanel
 	    }
 
 		/**
-		 * Update.
+		 * Update. Sobald sich etwas an den Daten oder Spaltenueberschriften geaendert hat, werden
+		 * die Objektvariablen mit neuen Werten belegt und die Methode aus {@code AbstractTableModel}
+		 * {@code fireTableStructureChanged();} wird aufgerufen, um das Model und somit die Tabelle
+		 * zu aktualisieren. Wuerden nur die Daten geaendert, also nicht die Struktur der Tabelle,
+		 * wuerde der Aufruf von {@code fireTableDataChanged()} genuegen.
 		 *
-		 * @param data   the data
-		 * @param titles the titles
+		 * @param data   - die neuen daten fuer die Tabelle
+		 * @param titles - die neuen Ueberschriften fuer die Tabelle
 		 */
 		public void update(String[][] data, String[] titles)
 	    {
@@ -344,7 +371,10 @@ public class StatistikGui extends JPanel
 	        this.titles = titles;
 	        fireTableStructureChanged();
 	    }
-	    
+
+	    /*
+	     * nachfolgend alles aus {@code TableModel} bzw. {@code AbstractTableModel}
+	     */
 	    @Override
 	    public int getRowCount() 
 	    {

@@ -9,19 +9,25 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 /**
- * Java Swing Hauptfenster
+ * Die Klasse {@code MainWindow} implementiert das Hauptfenster. Es handelt sich um ein
+ * JFrame mit tabbed JPanels darin. Es sind 2 JPanels implementiert, eines für den Kauf
+ * und den Verkauf von Aktien und eines für die Anzeige der statistischen Kursdaten der
+ * Aktien aus dem DAX.
+ * Ein JButton laesst das Programm beenden - mit Nachfrage.
+ * Das aktuelle Depot wird dem Konstruktor injiziert. Eine Nachricht im Fenster ist eine
+ * Objektvariable und wird entsprechend geaendert.
  */
 public class MainWindow extends JFrame
 {
 	/**
-	 * nachricht
+	 * Nachricht im MessgaePanel
 	 */
 	String message = "Wählen Sie eine Option:";
 
 	/**
 	 * Konstruktor
 	 *
-	 * @param depot the depot
+	 * @param depot - das aktuelle Depot; wird zum Kaufen/Verkaufen weitergereicht
 	 */
 	public MainWindow(Depot depot)
 	{
@@ -35,35 +41,28 @@ public class MainWindow extends JFrame
 	}
 
 	/**
-	 * Create tab panel j tabbed pane.
+	 * Erzeuge das tabbed Panel bestehend aus 2 Panels.
 	 *
-	 * @param depot Das Depot
-	 * @return the j tabbed pane
+	 * @param depot - das aktuelle Depot
+	 * @return das tabbed Panel (JTabbedPane)
 	 */
 	public JTabbedPane createTabPanel(Depot depot)
 	{
 		JTabbedPane tabbedPane = new JTabbedPane();
 
-		//JPanel tab1 = new LoadCSVGui();
+		JPanel tab1 = new KaufenGui(depot);
+		JPanel tab2 = new StatistikGui();
 
-		JPanel tab2 = new KaufenGui(depot);
-
-		//JPanel tab3 = new ConsoleGui();
-
-		JPanel tab4 = new StatistikGui();
-
-		//tabbedPane.addTab("Aktieninfos laden", tab1);
-		tabbedPane.addTab("Aktien kaufen/verkaufen", tab2);
-		//tabbedPane.addTab("Depot Ausgabe", tab3);
-		tabbedPane.addTab("Statistik", tab4);
+		tabbedPane.addTab("Aktien kaufen/verkaufen", tab1);
+		tabbedPane.addTab("Statistik", tab2);
 
 		return tabbedPane;
 	}
 
 	/**
-	 * Create message panel j panel.
+	 * Erzeuge das MessagePanel - Wert der Objektvariablen {@code message} wird angezeigt.
 	 *
-	 * @return the j panel
+	 * @return das MessagePanel (JPanel)
 	 */
 	public JPanel createMessagePanel()
 	{
@@ -73,11 +72,11 @@ public class MainWindow extends JFrame
 		return messagePanel;
 	}
 
-
 	/**
-	 * Create ende panel j panel.
+	 * Erzeuge das Panel mit dem Ende-Button. Enthält den JButton und dessen Ereignisbehandlung fuer
+	 * Klick. Nachfrage, ob wirklich beendet (JOptionPane).
 	 *
-	 * @return the j panel
+	 * @return das JPanel mit dem JButton "End"
 	 */
 	public JPanel createEndePanel()
 	{

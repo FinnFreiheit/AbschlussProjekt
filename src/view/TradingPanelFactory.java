@@ -4,6 +4,7 @@ import error.AktieNichtVorhanden;
 import error.DatumFehler;
 import error.FehlerCSVInhalt;
 import error.TagesInformationenNichtVorhanden;
+import io.csv.SchreibenCsv;
 import model.*;
 
 import javax.swing.*;
@@ -21,20 +22,29 @@ import java.util.Arrays;
 import java.util.Map;
 
 /**
- * The type Trading panel factory.
+ * Die Klasse {@code TradingPanelFactory} stellt ein Muster für ein einfaches Formular mit
+ * einem Rand mit Titel, drei JLabels und drei JComboBoxes sowie einem Button zum Absenden
+ * des Formlars dar. Die Klasse besitzt die Objektvariablen {@code datumInput},
+ * {@code aktieInput} und {@code anzahlInput} jeweils vom Typ JComboBox zur Eingabe des Datums,
+ * der Aktie und der Anzahl der zu kaufenden bzw. zu verKaufenden Aktie. Außerdem ist der String
+ * {@code titleFormular} eine Objektvariable sowie das aktuelle {@code depot}.
+ *
+ * Zwei Beispiele zur Anwendung:
+ * {@code new TradingPanelFactory("Kaufen", "Aktie kaufen", "Kaufdatum", depot);}
+ * {@code new TradingPanelFactory("Verkaufen", "Aktie verkaufen", "Verkaufdatum", depot));}
  */
 public class TradingPanelFactory extends JPanel
 {
     /**
-     * Datum input.
+     * Datum input. Editierbare JComboBox. Eingabeformat yyyy-mm-dd.
      */
     JComboBox<String> datumInput;
     /**
-     * Aktie input.
+     * Aktie input. Auswahlliste aller DAX-Aktien. Nicht editierbar.
      */
     JComboBox<String> aktieInput;
     /**
-     * Anzahl input.
+     * Anzahl input. Editierbare JComboBox. Eingabeformat ganzzahlige Zahl.
      */
     JComboBox<String> anzahlInput;
     /**
@@ -42,7 +52,7 @@ public class TradingPanelFactory extends JPanel
      */
     Depot depot;
     /**
-     * Title formular.
+     * Message innerhalb des Formulars.
      */
     String titleFormular;
 
@@ -50,12 +60,12 @@ public class TradingPanelFactory extends JPanel
     private final static String PATH = "database/";
 
     /**
-     * Instantiates a new Trading panel factory.
+     * Erzeugt ein neues TradingPanelFactory-Objekt (ein JPanel).
      *
-     * @param titleFormular     the title formular
-     * @param headLineFormular  the head line formular
-     * @param dateLabelFormular the date label formular
-     * @param depot             the depot
+     * @param titleFormular     der Titel des Formulars; wird auch als Inschrift für den Button verwendet
+     * @param headLineFormular  Nachricht innerhalb des Fensters
+     * @param dateLabelFormular das Label neben der Datum-Eingabe
+     * @param depot             das aktuelle Depot (wird nach Kauf bzw. Verkauf aktualisiert)
      */
     public TradingPanelFactory(String titleFormular, String headLineFormular, String dateLabelFormular, Depot depot)
     {
@@ -182,6 +192,7 @@ public class TradingPanelFactory extends JPanel
                         case "Kaufen" :
                             try {
                                 TradingPanelFactory.this.depot.kaufen(datum, anz, hdl);
+                                SchreibenCsv.schreibeKaufen(datum, hdl.getName(), String.valueOf(anz));
                                 TradingPanelFactory.this.depot.ausgabeDepot();
                             } catch (DatumFehler datumFehler) {
                                 datumFehler.printStackTrace();
@@ -202,6 +213,7 @@ public class TradingPanelFactory extends JPanel
                                     tagesInformationenNichtVorhanden.printStackTrace();
                                 }
                                 TradingPanelFactory.this.depot.verkaufen(datum, preis, anz, aktie);
+                                SchreibenCsv.schreibeVerkaufen(datum, aktie, String.valueOf(anz));
                                 TradingPanelFactory.this.depot.ausgabeDepot();
                             } catch (AktieNichtVorhanden aktieNichtVorhanden) {
                                 aktieNichtVorhanden.printStackTrace();

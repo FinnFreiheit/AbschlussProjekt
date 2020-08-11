@@ -49,7 +49,6 @@ public class Depot
           this.getAktie(name).setPreis(preis,-anz);
           this.getAktie(name).setAnzahl(getAktie(name).getAnzahl() - anz);
         }
-        SchreibenCsv.schreibeVerkaufen(datum, name, String.valueOf(anz));
         this.investitionsBetragDepot();
     }
 
@@ -80,7 +79,6 @@ public class Depot
             this.getAktie(hdl.getName()).setPreis(hdl.getTagesInformationen(datum).durchschnittsTagesPreis(), anz);
             this.getAktie(hdl.getName()).setAnzahl(getAktie(hdl.getName()).getAnzahl() + anz);
         }
-        SchreibenCsv.schreibeKaufen(datum, hdl.getName(), String.valueOf(anz));
         this.investitionsBetragDepot();
     }
 
