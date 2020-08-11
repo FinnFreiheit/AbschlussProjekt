@@ -20,17 +20,43 @@ import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.Map;
 
+/**
+ * The type Trading panel factory.
+ */
 public class TradingPanelFactory extends JPanel
 {
+    /**
+     * Datum input.
+     */
     JComboBox<String> datumInput;
+    /**
+     * Aktie input.
+     */
     JComboBox<String> aktieInput;
+    /**
+     * Anzahl input.
+     */
     JComboBox<String> anzahlInput;
+    /**
+     * Depot.
+     */
     Depot depot;
+    /**
+     * Title formular.
+     */
     String titleFormular;
 
     private final static boolean DEBUG = false;
     private final static String PATH = "database/";
 
+    /**
+     * Instantiates a new Trading panel factory.
+     *
+     * @param titleFormular     the title formular
+     * @param headLineFormular  the head line formular
+     * @param dateLabelFormular the date label formular
+     * @param depot             the depot
+     */
     public TradingPanelFactory(String titleFormular, String headLineFormular, String dateLabelFormular, Depot depot)
     {
         super();
