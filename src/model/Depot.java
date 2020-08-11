@@ -165,6 +165,15 @@ public class Depot
         throw new AktieNichtVorhanden("Aktie mit dem namen " + name + " ist nicht im Depot vorhanden vorhanden");
     }
 
+    /**
+     * Bestimmt den Wert des Depots zu einem bestimmten Zeitpunkt zurück.
+     *
+     * @param datum Das Datum, zu dem der Wert des Depots bestimmt werden soll.
+     * @param datenbasis Die Datenbasis.
+     * @return Den Wert zu einem bestimmten Zeitpunkt.
+     * @throws DatumFehler Exception bei einem Fehler mit dem Datum.
+     * @throws TagesInformationenNichtVorhanden Exception wenn die Tagesinformation nicht vorhanden ist.
+     */
     public double depotWertZumZeitpunkt(String datum, Database datenbasis) throws DatumFehler, TagesInformationenNichtVorhanden
     {
         double wert = 0;
@@ -181,4 +190,12 @@ public class Depot
         return wert;
     }
 
+    /**
+     * Gibt das Depot zurück
+     * @return Depot
+     */
+    public ArrayList<Aktie> getDepot()
+    {
+        return depot;
+    }
 }

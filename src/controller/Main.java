@@ -4,7 +4,7 @@ import error.AktieNichtVorhanden;
 import error.DatumFehler;
 import error.FehlerCSVInhalt;
 import error.TagesInformationenNichtVorhanden;
-import helper.GenerateCSV;
+import io.csv.GenerateCSV;
 import model.*;
 
 import java.io.File;

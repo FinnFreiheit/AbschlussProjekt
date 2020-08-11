@@ -133,5 +133,9 @@ public class HistorischeDatenListe
         return historischeDatenListe.get(historischeDatenListe.size() - 1).durchschnittsTagesPreis();
     }
 
+    public String getLetzteDatumAusListe()
+    {
+     return this.historischeDatenListe.get(historischeDatenListe.size()-1).getDatum();
+    }
 
 }
