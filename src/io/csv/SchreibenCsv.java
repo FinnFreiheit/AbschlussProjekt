@@ -11,7 +11,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * Die CSV Datei Kaufhistorie kann kann mit käufen und verkäufen erweitert werde.
+ * Die CSV Datei Kaufhistorie kann mit käufen und verkäufen erweitert werde.
  */
 public class SchreibenCsv
 {
