@@ -207,7 +207,7 @@ public class StatistikGui extends JPanel
 	}
 
 	/**
-	 * diese Methode liest alle Daten aus der Datei <Aktienkuerzel>.de aus und speichert
+	 * diese Methode liest alle Daten aus der Datei Aktienkuerzel.de aus und speichert
 	 * sie in einem zweidimensionalen Array (zeilen x spalten). Das Array wird zurueckgegeben.
 	 *
 	 * @param key - das Aktienkuerzel
@@ -235,7 +235,7 @@ public class StatistikGui extends JPanel
 	}
 
 	/**
-	 * diese Methode liest die Daten aus allen Dateien <Aktienkuerzel>.de zu dem bestimmten
+	 * diese Methode liest die Daten aus allen Dateien Aktienkuerzel.de zu dem bestimmten
 	 * Datum {@code date} aus und speichert sie in einem zweidimensionalen Array
 	 * (Aktien x spalten). Das Array wird zurueckgegeben.
 	 *
@@ -274,7 +274,7 @@ public class StatistikGui extends JPanel
 	}
 
 	/**
-	 * Diese Methode liest die Spaltenueberschriften aus der Datei <Aktienkuerzel>.de
+	 * Diese Methode liest die Spaltenueberschriften aus der Datei Aktienkuerzel.de
 	 * aus. Es handelt sich um die jeweils erste Zeile in der CSV-Datei. Die Spalten-
 	 * ueberschriften werden als String-Array zurueckgegeben.
 	 *
@@ -296,7 +296,7 @@ public class StatistikGui extends JPanel
 	}
 
 	/**
-	 * Diese Methode liest die Spaltenueberschriften aus der Datei <Aktienkuerzel>.de
+	 * Diese Methode liest die Spaltenueberschriften aus der Datei Aktienkuerzel.de
 	 * aus und aendert die erste Spaltenueberschrift von {@code Date} nach {@code Share}.
 	 * Es handelt sich um die jeweils erste Zeile in der CSV-Datei, die dann fuer den
 	 * ersten Eintrag angepasst wird. Die Spaltenueberschriften werden als String-Array

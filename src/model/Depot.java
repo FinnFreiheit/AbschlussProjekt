@@ -12,8 +12,14 @@ import java.util.ArrayList;
  */
 public class Depot
 {
-    //Objektvariablen
+    /**
+     * Liste aus Aktien
+     */
     private ArrayList<Aktie> depot;
+
+    /**
+     * die Summe der Beträge, die gezahlt wurden, um die Aktien im Depot zu erwerben.
+     */
     private double investition;
 
     /**
@@ -60,7 +66,9 @@ public class Depot
      * @param datum das Datum an dem eine Aktie gekauft wurde
      * @param anz   die Anzahl der gekauften Aktien
      * @param hdl   Die historischen Kursdaten, der Aktie. Anhand der Liste und des Datums wird der Preis ermittelt
-     * @throws DatumFehler the io exception wenn das Datum nicht vorhanden ist, oder falsch.
+     * @throws AktieNichtVorhanden Exception wenn die Aktien nicht vorhanden ist.
+     * @throws DatumFehler Exception wenn das Datum nicht vorhanden ist, oder falsch.
+     * @throws TagesInformationenNichtVorhanden Exception wenn die Tagesinformationen nicht vorhanden sind.
      * @pre die Börse war zum Kaufzeitpunkt geöffnet. Der Kauf ist nicht länger als ein Jahr her.
      * @inv die Aktie stammt aus dem DAX
      */
@@ -153,6 +161,7 @@ public class Depot
      *
      * @param name Name der Aktie bsp.: DAI.DE, SIE.DE
      * @return die Aktie mit dem Namen
+     * @throws AktieNichtVorhanden Exception wenn die Aktie nicht vorhanden ist
      */
     public Aktie getAktie(String name) throws AktieNichtVorhanden
     {

@@ -7,9 +7,19 @@ package model;
  */
 public class Aktie
 {
-    //Objekt Variablen
+    /**
+     * Anzahl der Aktien.
+     */
     private int anzahl;
+
+    /**
+     * Name der Aktie.
+     */
     private String name;
+
+    /**
+     * Preis der Aktie.
+     */
     private double preis;
 
     /**
@@ -63,7 +73,7 @@ public class Aktie
     /**
      * gibt den Preis der Aktie zurück.
      *
-     * @return preis
+     * @return preis preis
      */
     public double getPreis()
     {
@@ -73,7 +83,7 @@ public class Aktie
     /**
      * gibt den Namen der Aktie zurück.
      *
-     * @return name
+     * @return name name
      */
     public String getName()
     {

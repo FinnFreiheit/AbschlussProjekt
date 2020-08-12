@@ -6,9 +6,24 @@ package model;
  */
 public class Transaktion
 {
+    /**
+     * Datum der Transaktion
+     */
     String datum;
+
+    /**
+     * Anzahl gehandelten Aktien
+     */
     int anzahl;
+
+    /**
+     * Name der gehandelten Aktie
+     */
     String aktienName;
+
+    /**
+     * k für verkaufen und v für kaufen
+     */
     boolean handelsAktion;
 
     /**

@@ -15,14 +15,18 @@ import java.util.Map;
  */
 public class GenerateCSV
 {
-	final static boolean DEBUG = false;  // Zum Ein- und Ausschalten von Ausgaben
-	//Hier wird der Ordner angegeben in dem die CSV Dateien gespeichert werden sollen
+	/**
+	 * Zum Ein- und Ausschalten von Ausgaben
+	 */
+	final static boolean DEBUG = false;
+	/**
+	 * Hier wird der Ordner angegeben in dem die CSV Dateien gespeichert werden sollen
+	 */
 	final static String TARGETPATH = "database/";
 
 	/**
 	 * Ruft für jede Aktie im DAX die methode loadCSV(Key) auf und  erstellt somit die csv Dateien.
-	 * todo Vorbedingung Internet zugriff
-	 * todo nachbedingung vorhandene CSV dateien
+	 * @inv Internettverbindung wird benötigt
 	 */
 	public static void loadCSV()
 	{

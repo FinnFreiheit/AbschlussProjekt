@@ -8,12 +8,18 @@ import java.util.ArrayList;
 import java.util.Set;
 
 /**
- * Die Klasse Database, beinhaltet alle historische Datenlisten.
+ * Die Klasse {@code Database}, beinhaltet alle historische Datenlisten.
  */
 public class Database
 {
-    //Objekt Variablen
+    /**
+     * Liste aus historischen Datenlisten.
+     */
     private ArrayList<HistorischeDatenListe> datenBasis;
+
+    /**
+     * Ordnerpfad in dem sich die Daten befinden.
+     */
     final static String PATH = "database/";
 
     /**
@@ -27,6 +33,7 @@ public class Database
     /**
      * Fabrikmethode zur Erzeugung der Database aller
      * Aktien aus dem Dax
+     * @return die Database mit allen historischen Datenlisten der 30 DAX Unternehmen
      */
     public static Database generateDatabase()
     {

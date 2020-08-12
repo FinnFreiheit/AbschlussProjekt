@@ -3,17 +3,39 @@ package model;
 import java.util.Locale;
 
 /**
- * Beinhaltet alle Informationen einer Aktie an einem bestimmten Tag.
+ * Die Klasse {@code TagesInfo} Beinhaltet alle Informationen einer Aktie an einem bestimmten Tag.
  */
 public class TagesInfo implements CSVSchreibbar
 {
 
-    //Obejkt Variablen
+    /**
+     * das Datum zu den Tagesinformationen.
+     */
     private String datum;
+
+    /**
+     * Wert der Aktie beim öffnen der Börse.
+     */
     private double startWert;
+
+    /**
+     * Wert der Aktie beim schließen der Börse.
+     */
     private double schlussWert;
+
+    /**
+     * Den Maximalwert an diesem Tag
+     */
     private double tagesHoch;
+
+    /**
+     * Minimalwert an diesem Tag
+     */
     private double tagesTief;
+
+    /**
+     * Handelsvolumen
+     */
     private double volumen;
 
     /**
@@ -38,6 +60,7 @@ public class TagesInfo implements CSVSchreibbar
 
     /**
      * Copy Konstruktor
+     * @param info Objekt der Klasse Tagesinformation
      */
     public TagesInfo(TagesInfo info)
     {

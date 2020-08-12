@@ -18,10 +18,17 @@ import java.util.List;
 public class HistorischeDatenListe
 {
 
-    //Objekt Variablen
-    // TODO: 01.08.20 private -> problem bei Schreiben CSV
+    /**
+     * Liste aus Tagesinformationen
+     */
     public List<TagesInfo> historischeDatenListe;
+
+    /**
+     * Name der Aktie
+     */
     private String name;
+
+
 
 
     /**
@@ -31,6 +38,8 @@ public class HistorischeDatenListe
      * @throws IOException the io exception bei einem Fehler mit der Datei
      * @pre CSV Datei besitzt das richtige Format.
      * @post eine ArrayList mit alles wichtigen Tagesinformationen vom letzten Jahr
+     * @throws IOException input, output Exception
+     * @throws FehlerCSVInhalt Exception wenn ein Fehler mit dem Inhalt der CSV Datei vorliegt.
      * @inv Die CSV Datei wurde unter dem richtigen Namen gespeichert, damit die Objektvariable "Name" richtig
      * bestimmt werden kann.
      */
@@ -59,6 +68,8 @@ public class HistorischeDatenListe
      * @return die Informationen an diesem Tag
      * @throws DatumFehler the io exception bei einem fehler mit dem Datum
      * @pre Datum nicht in der Zukunft nicht älter als ein Jahr und nicht am Wochenende bzw. Feiertag.
+     * @throws DatumFehler Exception wenn ein Fehler mit dem Datum vorliegt.
+     * @throws TagesInformationenNichtVorhanden Exception wenn die Tagesinformationen nicht vorhanden sind.
      */
     public TagesInfo getTagesInformationen(String datum) throws DatumFehler, TagesInformationenNichtVorhanden
     {

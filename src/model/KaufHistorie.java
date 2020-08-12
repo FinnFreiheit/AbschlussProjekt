@@ -17,7 +17,9 @@ import java.util.ArrayList;
  */
 public class KaufHistorie
 {
-    //Objektvariablen
+    /**
+     * Liste der Transaktionen
+     */
     public ArrayList<Transaktion> kaufHistorie;
 
     /**

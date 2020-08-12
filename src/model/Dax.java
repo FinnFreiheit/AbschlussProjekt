@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * In dieser Klasse wird Definiert welche Unternehmen zum DAX gehören.
+ * Die Klasse {@code Dax} definiert welche Unternehmen zum DAX gehören.
  */
 public class Dax
 {

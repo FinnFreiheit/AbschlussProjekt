@@ -5,8 +5,6 @@ import model.TagesInfo;
 import java.io.*;
 import java.util.*;
 
-//TODO Beide LesenCSV können auch in eine Klasse
-
 /**
  * Die Klasse Lesen CSV dient dazu eine CSV Datei einzulesen.
  * Die Informationen werden in der ArrayListe HistorischeDatenListe gespeichert.

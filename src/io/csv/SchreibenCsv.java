@@ -10,8 +10,6 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
-// TODO: 31.07.20 Interface CSVSchreibbar einbinden
-
 /**
  * Die CSV Datei Kaufhistorie kann kann mit käufen und verkäufen erweitert werde.
  */
