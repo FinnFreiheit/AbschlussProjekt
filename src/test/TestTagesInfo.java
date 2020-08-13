@@ -26,16 +26,7 @@ class TestTagesInfo
     @Test
     void getDatum()
     {
-    }
-
-    @Test
-    void testToString()
-    {
-    }
-
-    @Test
-    void toCSV()
-    {
+        assertTrue(temp.getDatum().equals("2020-12-01"));
     }
 
     @Test
