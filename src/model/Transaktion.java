@@ -7,6 +7,7 @@ package model;
 public class Transaktion
 {
     /**
+     * @inv Das Datum muss innerhalb des letzten Jahres liegen.
      * Datum der Transaktion
      */
     String datum;
@@ -40,6 +41,6 @@ public class Transaktion
         this.aktienName = aktienName;
         this.anzahl = anzahl;
         //true fuer Kaufen
-        this.handelsAktion = handelsAktion.equals("k");
+        this.handelsAktion = handelsAktion.equals("k") || handelsAktion.equals("K");
     }
 }

@@ -60,7 +60,6 @@ class TestHistorischeDatenListe
 
 
     }
-    //todo Funktioniert nicht mehr da Private
     @org.junit.jupiter.api.AfterEach
     void tearDown()
     {

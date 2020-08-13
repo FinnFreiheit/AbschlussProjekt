@@ -11,9 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Eine historische Datenliste, beinhalten den Inhalt einer CSV Datei, von einer Aktie einer Firma, über einen
- * gewissen Zeitraum.
  * Die historische Datenliste besteht aus Tagesinformationen und dem Namen der Firma.
+ * Ein historische Datenliste beinhaltet alle Informationen, die aus einer CSV Datei ausgelesen werden konnte.
  */
 public class HistorischeDatenListe
 {
@@ -29,17 +28,15 @@ public class HistorischeDatenListe
     private String name;
 
 
-
-
     /**
      * Konstruktor
      *
      * @param file das File der CSV Datei.
-     * @throws IOException the io exception bei einem Fehler mit der Datei
+     * @throws IOException     the io exception bei einem Fehler mit der Datei
+     * @throws IOException     input, output Exception
+     * @throws FehlerCSVInhalt Exception wenn ein Fehler mit dem Inhalt der CSV Datei vorliegt.
      * @pre CSV Datei besitzt das richtige Format.
      * @post eine ArrayList mit alles wichtigen Tagesinformationen vom letzten Jahr
-     * @throws IOException input, output Exception
-     * @throws FehlerCSVInhalt Exception wenn ein Fehler mit dem Inhalt der CSV Datei vorliegt.
      * @inv Die CSV Datei wurde unter dem richtigen Namen gespeichert, damit die Objektvariable "Name" richtig
      * bestimmt werden kann.
      */
@@ -62,14 +59,14 @@ public class HistorischeDatenListe
     }
 
     /**
-     * Get Tagesinformationen.
+     * gibt die Tagesinformationen an dem gesuchten Datum zurück.
      *
      * @param datum das Datum des Tages
      * @return die Informationen an diesem Tag
-     * @throws DatumFehler the io exception bei einem fehler mit dem Datum
-     * @pre Datum nicht in der Zukunft nicht älter als ein Jahr und nicht am Wochenende bzw. Feiertag.
-     * @throws DatumFehler Exception wenn ein Fehler mit dem Datum vorliegt.
+     * @throws DatumFehler                      the io exception bei einem fehler mit dem Datum
+     * @throws DatumFehler                      Exception wenn ein Fehler mit dem Datum vorliegt.
      * @throws TagesInformationenNichtVorhanden Exception wenn die Tagesinformationen nicht vorhanden sind.
+     * @pre Datum nicht in der Zukunft nicht älter als ein Jahr und nicht am Wochenende bzw. Feiertag.
      */
     public TagesInfo getTagesInformationen(String datum) throws DatumFehler, TagesInformationenNichtVorhanden
     {
@@ -81,15 +78,15 @@ public class HistorischeDatenListe
         {
             if (t.getDatum().equals(datum)) return t;
         }
-        throw new TagesInformationenNichtVorhanden("Es existieren keine Tagesinformationen zu dem Datum " +
-               datum);
+        throw new TagesInformationenNichtVorhanden("Es existieren keine Tagesinformationen zu dem Datum " + datum);
     }
 
     /**
      * Rückgabe Durchschnittspreis an einem gesuchten Tag
+     *
      * @param datum der gesuchte Tag
      * @return Durchschnnittspreis
-     * @throws DatumFehler Exception bei einem Fehler mit dem Datum
+     * @throws DatumFehler                      Exception bei einem Fehler mit dem Datum
      * @throws TagesInformationenNichtVorhanden Exception wenn die Tagesinformationen nicht vorhanden sind.
      * @pre Datum nicht in der Zukunft nicht älter als ein Jahr und nicht am Wochenende bzw. Feiertag.
      */
@@ -108,14 +105,14 @@ public class HistorischeDatenListe
     private static boolean eingabeDatumUeberpruefen(String datum)
     {
         String[] datumSplit = datum.split("-");
-        return datumSplit.length == 3 && datumSplit[0].length() == 4 && datumSplit[1].length() == 2 && datumSplit[2].length() == 2;
+        return datumSplit.length == 3 && datumSplit[0].length() == 4 && datumSplit[1].length() == 2 &&
+                datumSplit[2].length() == 2;
 
     }
 
     /**
-     * Get name aus file.
      * Der Dateiname beinhaltet den Namen der Aktie.
-
+     *
      * @param file File der CSV Datei
      * @return Name der Aktie
      */
@@ -129,7 +126,7 @@ public class HistorischeDatenListe
     }
 
     /**
-     * Gets name.
+     * Gibt den Namen der historischen Datenliste zurück.
      *
      * @return the name
      */
@@ -137,16 +134,4 @@ public class HistorischeDatenListe
     {
         return this.name;
     }
-
-    // TODO: 08.08.20 Aktuellen wert des Depots
-    public double getLetztenDurchschnittspreis()
-    {
-        return historischeDatenListe.get(historischeDatenListe.size() - 1).durchschnittsTagesPreis();
-    }
-
-    public String getLetzteDatumAusListe()
-    {
-     return this.historischeDatenListe.get(historischeDatenListe.size()-1).getDatum();
-    }
-
 }

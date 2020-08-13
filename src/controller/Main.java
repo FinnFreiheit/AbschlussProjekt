@@ -21,6 +21,7 @@ public class Main
     /**
      * Die CSV Datei, die informationen über die Transaktionen des Anwenders beinhaltet, muss vom Anwender in den
      * Ordner database gelegt werden.
+     * Es wird eine neues File fuer die Kaufhistorie erstellt.
      */
     static File kaufHistorieFile = new File("database/KaufHistorie.csv");
 
@@ -59,6 +60,4 @@ public class Main
         System.out.println("______________________________");
         System.out.println("_____________");
     }
-
-
 }

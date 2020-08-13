@@ -38,9 +38,10 @@ public class KaufHistorie
      * Erstellt ein Objekt der Klasse Depot anhand der Kaufhistorie
      * Und gibt das Depot nach jeder Transaktion auf die Konsole aus, mit Gewinn und Verlust und dem bis jetzt
      * investierten Betrag.
-     *
+     * @pre die datenbasis wurde erfolgreich erstellt.
+     * @pre die Datenbasis beinhaltet alle benötigten informationen, um die Transaktionen auszuführen.
      * @param datenbasis die Datenbasis
-     * @return das Depot
+     * @return das Depot das erzeugte Depot
      * @throws DatumFehler                      the io exception bei einem fehler mit dem Datum
      * @throws AktieNichtVorhanden              Exception wenn die Aktie nicht vorhanden ist
      * @throws TagesInformationenNichtVorhanden Exception wenn die Tagesinformationen nicht vorhanden sind

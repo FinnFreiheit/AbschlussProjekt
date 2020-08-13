@@ -40,9 +40,6 @@ class TestKaufHistorie
         try
         {
             testDepot = testKaufHistorie.depotErstellen(data);
-
-            // TODO: 05.08.20 DataException
-            //testDepot = testKaufHistorie.depotErstellen(dummyData);
         } catch (DatumFehler | AktieNichtVorhanden | TagesInformationenNichtVorhanden datumFehler)
         {
             datumFehler.printStackTrace();

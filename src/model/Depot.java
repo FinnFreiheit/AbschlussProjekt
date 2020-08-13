@@ -33,7 +33,8 @@ public class Depot
     }
 
     /**
-     * Verkaufen
+     * Aktien, die sich im Depot befinden werden verkauft. Beim verkaufen einer Aktie wird die Anzahl der Aktien und
+     * ihr durchschnittspreis angepasst.
      * @param datum Das Datum an dem eine Aktie verkauft wurde.
      * @param preis verkaufspreis
      * @param anz   the anz
@@ -62,6 +63,7 @@ public class Depot
      * Dem Depot wird eine neue Aktie hinzugefügt. Dazu werden die Informationen benötigt wann man die Aktie
      * gekauft hat, welche Aktie man gekauft hat und wie viele Aktien man kauft.
      * Es wird ein neues Objekt der Klasse Aktie anhand dieser Informationen erstellt.
+     * Wenn die Aktie bereits im Depot ist, wird die Anzahl und der Durchschnittspreis der Aktie angepasst.
      *
      * @param datum das Datum an dem eine Aktie gekauft wurde
      * @param anz   die Anzahl der gekauften Aktien
@@ -91,9 +93,8 @@ public class Depot
     }
 
 
-    // TODO: 04.08.20 Wert
     /**
-     * Wert Depot double.
+     * Wert Depot vom Typ {@code double}.
      */
     public void investitionsBetragDepot()
     {
@@ -106,7 +107,7 @@ public class Depot
     }
 
     /**
-     * Ausgabe Depot auf Konsole.
+     * Ausgabe des Depots auf Konsole.
      */
     public void ausgabeDepot()
     {
@@ -122,8 +123,7 @@ public class Depot
     }
 
     /**
-     * Gets anzahl aktien.
-     *
+     * Gibt die Anzahl der Aktien die sich im Depot befinden zurück.
      * @return the anzahl aktien
      */
     public int getAnzahlAktien()
@@ -142,7 +142,7 @@ public class Depot
     }
 
     /**
-     * überprüft ob die Aktie im Depot vorhanden ist boolean.
+     * überprüft ob die Aktie im Depot vorhanden ist. Typ {@code boolean}.
      *
      * @param name Name der Aktie
      * @return the boolean true wenn vorhanden, false wenn nicht
@@ -157,7 +157,7 @@ public class Depot
     }
 
     /**
-     * Gets aktie.
+     * Gibt die Aktie mit dem gesuchten Namen zurück.
      *
      * @param name Name der Aktie bsp.: DAI.DE, SIE.DE
      * @return die Aktie mit dem Namen
@@ -173,11 +173,11 @@ public class Depot
     }
 
     /**
-     * Bestimmt den Wert des Depots zu einem bestimmten Zeitpunkt zurück.
+     * Bestimmt den Wert des Depots zu einem bestimmten Zeitpunkt.
      *
      * @param datum Das Datum, zu dem der Wert des Depots bestimmt werden soll.
      * @param datenbasis Die Datenbasis.
-     * @return Den Wert zu einem bestimmten Zeitpunkt.
+     * @return Der Wert zu einem bestimmten Zeitpunkt.
      * @throws DatumFehler Exception bei einem Fehler mit dem Datum.
      * @throws TagesInformationenNichtVorhanden Exception wenn die Tagesinformation nicht vorhanden ist.
      */

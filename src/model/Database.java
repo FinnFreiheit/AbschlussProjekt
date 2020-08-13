@@ -83,7 +83,6 @@ public class Database
         {
             if(historischeDatenListe.getName().equals(name)) return historischeDatenListe;
         }
-        // TODO: 05.08.20 Fehlerbehandlung wenn nicht vorhanden
        return null;
     }
 }
