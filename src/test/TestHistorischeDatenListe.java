@@ -19,7 +19,7 @@ class TestHistorischeDatenListe
     @org.junit.jupiter.api.BeforeEach
     void setUp() throws IOException, FehlerCSVInhalt
     {
-        daimler = new HistorischeDatenListe(new File("/Users/Finn/IdeaProjects/Aktien/src/test/DAI.DE.csv"));
+        //daimler = new HistorischeDatenListe(new File("/Users/Finn/IdeaProjects/Aktien/src/test/DAI.DE.csv"));
     }
 
     @org.junit.jupiter.api.Test

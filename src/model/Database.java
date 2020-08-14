@@ -4,6 +4,7 @@ import error.FehlerCSVInhalt;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Set;
 
@@ -42,9 +43,11 @@ public class Database
         Set<String> dax = Dax.getDax().keySet(); // alle Aktienkuerzel aus dem Dax
         for(String key : dax)
         {
-            File file = new File(PATH + key + ".csv");
+            //File file = new File(PATH + key + ".csv");
+            InputStream file = Database.class.getClassLoader().getResourceAsStream("io/csv/database/"+key + ".csv");
             try {
                 HistorischeDatenListe hdl = new HistorischeDatenListe(file);
+                hdl.setName(key);
                 db.addData(hdl);
                 System.out.printf("        HistorischeDatenListe von %-7s zur Database hinzugefuegt.%n", key);
             }

@@ -23,10 +23,11 @@ public class LesenCsvTagesInformationen
      * @throws IOException     the io exception
      * @throws FehlerCSVInhalt the fehler csv inhalt
      */
-    public static ArrayList<TagesInfo> lesenCSV(File file) throws IOException, FehlerCSVInhalt
+    public static ArrayList<TagesInfo> lesenCSV(InputStream file) throws IOException, FehlerCSVInhalt
     {
         ArrayList<TagesInfo> tagesInfoListe = new ArrayList<>();
-        try(BufferedReader reader = new BufferedReader(new FileReader(file)))
+        try(BufferedReader reader = new BufferedReader(new InputStreamReader(file)))
+
         {
             String zeile;
             //Erste zeile von CSV Datei wird nicht benoetigt.

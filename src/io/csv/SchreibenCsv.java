@@ -21,7 +21,7 @@ public class SchreibenCsv
      */
     private static void appendToKaufHistorie(List<String> data)
     {
-        String fileName = "database/KaufHistorie.csv";
+        String fileName = "io/csv/database/KaufHistorie.csv";
         FileWriter csvWriter = null;
         try {
             csvWriter = new FileWriter(fileName, true);  // true --> append

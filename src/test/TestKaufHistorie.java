@@ -4,6 +4,7 @@ import error.AktieNichtVorhanden;
 import error.DatumFehler;
 import error.FehlerCSVInhalt;
 import error.TagesInformationenNichtVorhanden;
+import io.csv.LesenCSVKaufHistorie;
 import model.Database;
 import model.Depot;
 import model.HistorischeDatenListe;
@@ -14,6 +15,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -27,8 +29,9 @@ class TestKaufHistorie
     @BeforeEach
     void setUp() throws IOException, FehlerCSVInhalt
     {
-        testKaufHistorie = new KaufHistorie(new File("./src/test/KaufHistorie.csv"));
-        daimler = new HistorischeDatenListe(new File("./src/test/DAI.DE.csv"));
+        InputStream in = LesenCSVKaufHistorie.class.getClassLoader().getResourceAsStream("io/csv/database/KaufHistorie.csv");
+        testKaufHistorie = new KaufHistorie(in);
+        //daimler = new HistorischeDatenListe(new File("./src/test/DAI.DE.csv"));
         data.addData(daimler);
 
     }

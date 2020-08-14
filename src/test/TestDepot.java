@@ -12,12 +12,14 @@ import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class TestDepot
 {
-    static File file = new File("/Users/Finn/IdeaProjects/Aktien/src/test/DAI.DE.csv");
+    InputStream file = getClass().getClassLoader().getResourceAsStream("/Users/Finn/IdeaProjects/Aktien/src/test/DAI.DE.csv");
+    //static File file = new File("/Users/Finn/IdeaProjects/Aktien/src/test/DAI.DE.csv");
     HistorischeDatenListe daimler;
     Depot meinDepot;
 

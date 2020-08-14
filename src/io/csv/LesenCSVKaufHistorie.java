@@ -11,6 +11,7 @@ import java.util.ArrayList;
  */
 public class LesenCSVKaufHistorie
 {
+
     /**
      * Die CSV Datei wird eingelesen und aus einer Zeile wird ein Objekt der Klasse Transaktion erstellt.
      * Die Methode liefert eine ArrayList aus Transaktionen zurück.
@@ -21,10 +22,13 @@ public class LesenCSVKaufHistorie
      * @throws IOException     the io exception
      * @throws FehlerCSVInhalt the fehler csv inhalt
      */
-    public static ArrayList<Transaktion> lesenCSVtoTransaktionenListe(File file) throws IOException, FehlerCSVInhalt
+    public static ArrayList<Transaktion> lesenCSVtoTransaktionenListe(InputStream file) throws IOException, FehlerCSVInhalt
     {
+
+        InputStream in = LesenCSVKaufHistorie.class.getClassLoader().getResourceAsStream("io/csv/database/KaufHistorie.csv");
         ArrayList<Transaktion> transaktionenListe = new ArrayList<>();
-        try(BufferedReader reader = new BufferedReader(new FileReader(file)))
+        //try(BufferedReader reader = new BufferedReader(new FileReader(file)))
+        BufferedReader reader = new BufferedReader(new InputStreamReader(in));
         {
             String zeile;
             reader.readLine();
@@ -37,6 +41,8 @@ public class LesenCSVKaufHistorie
         }
         return transaktionenListe;
     }
+
+
 
     /**
      * Die Informationen einer Zeile aus der CSV Datei werden in Objekte der Klasse Transaktion gespeichert.

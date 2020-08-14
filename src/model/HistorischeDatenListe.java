@@ -7,6 +7,7 @@ import io.csv.LesenCsvTagesInformationen;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,11 +41,10 @@ public class HistorischeDatenListe
      * @inv Die CSV Datei wurde unter dem richtigen Namen gespeichert, damit die Objektvariable "Name" richtig
      * bestimmt werden kann.
      */
-    public HistorischeDatenListe(File file) throws IOException, FehlerCSVInhalt
+    public HistorischeDatenListe(InputStream file) throws IOException, FehlerCSVInhalt
     {
         this.historischeDatenListe = new ArrayList<>();
         this.historischeDatenListe = LesenCsvTagesInformationen.lesenCSV(file);
-        this.name = getNameAusFile(file);
     }
 
     /**
@@ -111,21 +111,6 @@ public class HistorischeDatenListe
     }
 
     /**
-     * Der Dateiname beinhaltet den Namen der Aktie.
-     *
-     * @param file File der CSV Datei
-     * @return Name der Aktie
-     */
-    private static String getNameAusFile(File file)
-    {
-        String stringFile = file.toString();
-        String[] strings = stringFile.split("/");
-        String nameMitDateiEndung = strings[strings.length - 1];
-        String[] nameMitDateiEndungListe = nameMitDateiEndung.split("\\.");
-        return nameMitDateiEndungListe[0] + "." + nameMitDateiEndungListe[1];
-    }
-
-    /**
      * Gibt den Namen der historischen Datenliste zurück.
      *
      * @return the name
@@ -133,5 +118,11 @@ public class HistorischeDatenListe
     public String getName()
     {
         return this.name;
+    }
+
+
+    public void setName(String name)
+    {
+        this.name = name;
     }
 }

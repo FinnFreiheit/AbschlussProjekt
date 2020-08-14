@@ -8,6 +8,7 @@ import io.csv.LesenCSVKaufHistorie;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 
@@ -29,7 +30,7 @@ public class KaufHistorie
      * @throws IOException     the io exception bei fehler mit der Datei
      * @throws FehlerCSVInhalt the fehler csv inhalt
      */
-    public KaufHistorie(File file) throws IOException, FehlerCSVInhalt
+    public KaufHistorie(InputStream file) throws IOException, FehlerCSVInhalt
     {
         this.kaufHistorie = LesenCSVKaufHistorie.lesenCSVtoTransaktionenListe(file);
     }

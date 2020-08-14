@@ -2,6 +2,8 @@ package view;
 
 import java.awt.BorderLayout;
 import javax.swing.*;
+
+import io.csv.TradingPanelFactory;
 import model.Depot;
 
 /**

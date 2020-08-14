@@ -5,10 +5,12 @@ import error.DatumFehler;
 import error.FehlerCSVInhalt;
 import error.TagesInformationenNichtVorhanden;
 import io.csv.GenerateCSV;
+import io.csv.LesenCSVKaufHistorie;
 import model.*;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -23,7 +25,9 @@ public class Main
      * Ordner database gelegt werden.
      * Es wird eine neues File fuer die Kaufhistorie erstellt.
      */
-    static File kaufHistorieFile = new File("database/KaufHistorie.csv");
+    //static File kaufHistorieFile = new File("database/KaufHistorie.csv");
+    static InputStream
+            kaufHistorieFile = LesenCSVKaufHistorie.class.getClassLoader().getResourceAsStream("io/csv/database/KaufHistorie.csv");
 
     /**
      * Startmethode des Programmes.
@@ -39,7 +43,7 @@ public class Main
             throws IOException, DatumFehler, AktieNichtVorhanden, TagesInformationenNichtVorhanden, FehlerCSVInhalt
     {
         System.out.printf("%n%n------ 1. alle csv-Dateien laden ------%n%n");
-        GenerateCSV.loadCSV();
+        //GenerateCSV.loadCSV();
 
         System.out.printf("%n%n------ 2. Datenbasis erstellen --------%n%n");
         Database datenbasis = Database.generateDatabase();
